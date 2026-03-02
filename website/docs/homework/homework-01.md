@@ -5,7 +5,7 @@ sidebar_position: 1
 slug: /assignments/homework-01
 releaseDate: '2026-02-26'
 dueDate: '2026-03-05'
-draft: true
+unlisted: true
 ---
 
 # Homework 1: Environment Check and Course Setup

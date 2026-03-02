@@ -3,7 +3,7 @@ import {frontMatter as homework01} from '@site/docs/homework/homework-01.md';
 const rawAssignments = [homework01];
 
 const assignments = rawAssignments
-  .filter(item => !item.draft)
+  .filter(item => !item.draft && !item.unlisted)
   .map(item => ({
     id: item.id ?? item.slug ?? item.title,
     title: item.title ?? 'Untitled Assignment',
