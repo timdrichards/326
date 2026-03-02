@@ -21,10 +21,10 @@ width: 1280
 height: 720
 margin: 0.08
 timeForPresentation: "75"
-title: "Persistence: Making State Survive Reality"
+title: "Persistence"
 info: |
-  # Persistence: Making State Survive Reality
-  COMPSCI 326 Web Programming - Lecture 6.9
+  COMPSCI 326 Web Programming
+  Lecture 6.9: Persistence
 ---
 
 <style>
@@ -34,8 +34,10 @@ info: |
 
 # Persistence
 
+## COMPSCI 326 Web Programming
+
 <div class="text-2xl opacity-70 mt-6">
-COMPSCI 326 Web Programming - Lecture 6.9
+Lecture 6.9: Persistence
 </div>
 
 ---

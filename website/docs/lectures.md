@@ -15,7 +15,7 @@ Use the pages below as your semester lecture templates:
 - Week 03 (draft)
 - Week 04 (draft)
 - Week 05 (draft)
-- [Week 06](./weeks/week-06)
+- Week 06 (draft)
 - Week 07 (draft)
 - Week 08 (draft)
 - Week 09 (draft)
