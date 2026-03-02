@@ -10,7 +10,9 @@ Use this page as the assignment index and policy overview.
 
 Current homework pages:
 
-- [Homework 1 placeholder](./assignments/homework-01)
+<!-- - [Homework 1 placeholder](./assignments/homework-01) -->
+
+None
 
 ## Student notes (replace this)
 

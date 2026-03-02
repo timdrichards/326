@@ -42,10 +42,7 @@ const config = {
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
-  },
+  i18n: { defaultLocale: 'en', locales: ['en'] },
 
   presets: [
     [
@@ -54,11 +51,10 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
+          exclude: ['**/_*.md', '**/_*.mdx'],
         },
         blog: false,
-        theme: {
-          customCss: './src/css/custom.css',
-        },
+        theme: { customCss: './src/css/custom.css' },
       }),
     ],
   ],
@@ -68,16 +64,11 @@ const config = {
     ({
       // Replace with your project's social card
       image: 'img/social-card.svg',
-      colorMode: {
-        respectPrefersColorScheme: true,
-      },
+      colorMode: { respectPrefersColorScheme: true },
       navbar: {
         title: '326',
         hideOnScroll: true,
-        logo: {
-          alt: '326 Course Hub Logo',
-          src: 'img/logo-mark.svg',
-        },
+        logo: { alt: '326 Course Hub Logo', src: 'img/logo-mark.svg' },
         items: [
           {
             type: 'docSidebar',
@@ -93,33 +84,19 @@ const config = {
           {
             title: 'Course Site',
             items: [
-              {
-                label: 'Start Here',
-                to: '/docs/intro',
-              },
-              {
-                label: 'Course Structure',
-                to: '/docs/course-structure',
-              },
+              { label: 'Start Here', to: '/docs/intro' },
+              { label: 'Course Structure', to: '/docs/course-structure' },
             ],
           },
           {
             title: 'Workflow',
-            items: [
-              {
-                label: 'Site Workflow',
-                to: '/docs/site-workflow',
-              },
-            ],
+            items: [{ label: 'Site Workflow', to: '/docs/site-workflow' }],
           },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Tim Richards. Built with Docusaurus.`,
       },
-      prism: {
-        theme: prismThemes.github,
-        darkTheme: prismThemes.dracula,
-      },
+      prism: { theme: prismThemes.github, darkTheme: prismThemes.dracula },
     }),
-};
+}
 
 export default config;
