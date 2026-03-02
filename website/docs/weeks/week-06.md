@@ -15,7 +15,6 @@ In the second lecture, we shift from file-based persistence to relational databa
 
 By the end of the week, students should understand not only why persistence matters, but also how to implement a maintainable path from conceptual data modeling to production-style database workflows.
 
-
 ## Learning Goals
 
 By the end of this week, students should be able to:
@@ -44,10 +43,11 @@ By the end of this week, students should be able to:
 
 ## Lecture Materials
 
-- Slides: _Add link_
-- Notes: _Add link_
+- Slides: <a href="/326/decks/09-persistence/" target="_blank" rel="noopener noreferrer">09 Persistence</a>
+
+<!-- - Notes: _Add link_
 - Demo code (repo path): _Add link/path_
-- Recording (if applicable): _Add link_
+- Recording (if applicable): _Add link_ -->
 
 <!-- ## In-Class Activities
 
