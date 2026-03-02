@@ -10,20 +10,20 @@ This page is the landing index for weekly lecture notes, demos, and references.
 
 Use the pages below as your semester lecture templates:
 
-- [Week 01](./weeks/week-01)
-- [Week 02](./weeks/week-02)
-- [Week 03](./weeks/week-03)
-- [Week 04](./weeks/week-04)
-- [Week 05](./weeks/week-05)
+- Week 01 (draft)
+- Week 02 (draft)
+- Week 03 (draft)
+- Week 04 (draft)
+- Week 05 (draft)
 - [Week 06](./weeks/week-06)
-- [Week 07](./weeks/week-07)
-- [Week 08](./weeks/week-08)
-- [Week 09](./weeks/week-09)
-- [Week 10](./weeks/week-10)
-- [Week 11](./weeks/week-11)
-- [Week 12](./weeks/week-12)
-- [Week 13](./weeks/week-13)
-- [Week 14](./weeks/week-14)
+- Week 07 (draft)
+- Week 08 (draft)
+- Week 09 (draft)
+- Week 10 (draft)
+- Week 11 (draft)
+- Week 12 (draft)
+- Week 13 (draft)
+- Week 14 (draft)
 
 ## Recommended workflow
 
