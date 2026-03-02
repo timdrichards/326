@@ -1,4 +1,4 @@
-# 426 Repository
+# 326 Repository
 
 This repository contains course materials and a Docusaurus site used to publish course documentation to GitHub Pages.
 
@@ -16,7 +16,7 @@ npm install
 npm start
 ```
 
-Docusaurus will print a local URL (typically `http://localhost:3000/426/` for this repo setup).
+Docusaurus will print a local URL (typically `http://localhost:3000/326/` for this repo setup).
 
 ## Build the site locally
 
@@ -30,6 +30,6 @@ npm run build
 This repo deploys the Docusaurus site to GitHub Pages via GitHub Actions.
 
 - Workflow file: `.github/workflows/deploy-docusaurus.yml`
-- Production URL: <https://timdrichards.github.io/426/>
+- Production URL: <https://timdrichards.github.io/326/>
 
 Pushes to `main` trigger a deploy.

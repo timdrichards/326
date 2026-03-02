@@ -11,13 +11,13 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const repository = process.env.GITHUB_REPOSITORY ?? '';
 const [repoOwnerFromEnv, repoNameFromEnv] = repository.split('/');
 const organizationName = repoOwnerFromEnv || 'YOUR_GITHUB_USERNAME';
-const projectName = repoNameFromEnv || '426';
+const projectName = repoNameFromEnv || '326';
 const githubPagesUrl = `https://${organizationName}.github.io`;
 const baseUrl = process.env.DOCUSAURUS_BASE_URL ?? `/${projectName}/`;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '426 Course Hub',
+  title: '326 Course Hub',
   tagline: 'Lecture notes, demos, and reference material',
   favicon: 'img/favicon.svg',
 
@@ -72,10 +72,10 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: '426',
+        title: '326',
         hideOnScroll: true,
         logo: {
-          alt: '426 Course Hub Logo',
+          alt: '326 Course Hub Logo',
           src: 'img/logo-mark.svg',
         },
         items: [

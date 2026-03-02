@@ -3,9 +3,9 @@ sidebar_position: 1
 slug: /intro
 ---
 
-# Welcome to the 426 Course Hub
+# Welcome to the 326 Course Hub
 
-This site is the documentation layer for the `426` repository. It is designed to host course-facing material such as:
+This site is the documentation layer for the `326` repository. It is designed to host course-facing material such as:
 
 - lecture references and supporting notes
 - assignment instructions and project guidance
@@ -35,13 +35,13 @@ npm install
 npm start
 ```
 
-Open [http://localhost:3000/426/](http://localhost:3000/426/) (or the local URL Docusaurus prints). Changes in `website/docs` and `website/src` reload automatically.
+Open [http://localhost:3000/326/](http://localhost:3000/326/) (or the local URL Docusaurus prints). Changes in `website/docs` and `website/src` reload automatically.
 
 ## Publishing
 
 This repository is configured to deploy the Docusaurus build to GitHub Pages using GitHub Actions when changes are pushed to `main`.
 
-- Production URL: [https://timdrichards.github.io/426/](https://timdrichards.github.io/426/)
+- Production URL: [https://timdrichards.github.io/326/](https://timdrichards.github.io/326/)
 - Workflow: `Deploy Docusaurus to GitHub Pages`
 
 ## Next recommended content
