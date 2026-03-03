@@ -29,9 +29,9 @@ By the end of this week, students should be able to:
 
 In this lecture, we learn why persistence matters in real apps: memory is temporary, but user data must stay correct after restarts, errors, and overlapping requests. We focus on the core ideas from the slides and reading: the difference between volatile and persistent state, what counts as canonical data, and why a clear repository boundary helps keep code clean and testable. Through small TypeScript examples, we also look at common problems like partial writes and lost updates, then practice simple patterns that make data handling safer and easier to reason about.
 
-- <a href="/326/decks/09-persistence/" target="_blank" rel="noopener noreferrer">Slides</a>
-- [Reading](/readings/9-persistence.md)
-- <a href="/326/code/09-persistence.zip" target="_blank" rel="noopener noreferrer">Code</a>
+- [Slides](pathname:///decks/09-persistence/index.html)
+- [Reading](/docs/readings/persistence)
+- [Code](/code/09-persistence.zip)
 
 ## Lecture 6.10: Repositories and ORMs
 

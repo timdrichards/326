@@ -6,9 +6,9 @@ sidebar_position: 4
 
 ## Weeks
 
-- [Week 06](/326/docs/weeks/week-06)
+- [Week 06](/docs/weeks/week-06)
 
 ## Lectures
 
-- [Lecture 6.9 - Persistence](/326/docs/weeks/week-06#lecture-69-persistence)
-- [Lecture 6.10 - Repositories and ORMs](/326/docs/weeks/week-06#lecture-610-repositories-and-orms)
+- [Lecture 6.9 - Persistence](/docs/weeks/week-06#lecture-69-persistence)
+- [Lecture 6.10 - Repositories and ORMs](/docs/weeks/week-06#lecture-610-repositories-and-orms)

@@ -16,6 +16,7 @@ slideNumber: true
 center: false
 overview: true
 hash: true
+routerMode: hash
 navigationMode: default
 width: 1280
 height: 720
@@ -916,12 +917,14 @@ layoutClass: cols-50-50 title-tight exercise-compact
 
 ::left::
 
-### In-Class Exercise (Pairs)
+### In-Class Activity
 
-Pick **2 scenarios** and fill in design blanks. Scenarios:
+**Persistence Design Drill**
 
-- A) Save a journal entry draft
-- B) Increment cart item quantity
+Pick **1 scenarios** and fill in design blanks. Scenarios:
+
+- A) Save a journal entry draft (do not pick this one)
+- B) Increment cart item quanatity
 - C) Mark a task complete
 - D) Rename a project
 

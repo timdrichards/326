@@ -279,7 +279,7 @@ This chapter draws on the following local course materials and external referenc
 
 Local course materials:
 
-- <a href="/326/code/08-rendering.zip">08-rendering.zip</a>
+- [08-rendering.zip](/code/08-rendering.zip)
 
 External references:
 
