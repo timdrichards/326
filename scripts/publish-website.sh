@@ -66,6 +66,15 @@ if [[ -z "${publish_status}" ]]; then
   exit 0
 fi
 
+echo "==> Staging repository changes"
+git add -A
+
+staged_status="$(git diff --cached --name-status)"
+if [[ -z "${staged_status}" ]]; then
+  echo "No staged changes found after git add -A."
+  exit 0
+fi
+
 echo
 echo "Changes detected."
 echo "Run 'git status' to inspect details."
@@ -78,12 +87,6 @@ fi
 
 timestamp="$(date -u +"%Y-%m-%d %H:%M:%SZ")"
 commit_message="chore(publish): publish website assets (${timestamp})"
-
-git add -A website/static/decks website/static/code
-if git diff --cached --quiet; then
-  echo "No staged publish changes found in website/static/decks or website/static/code."
-  exit 0
-fi
 
 git commit -m "${commit_message}"
 git push origin main
