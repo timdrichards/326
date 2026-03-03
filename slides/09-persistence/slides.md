@@ -92,7 +92,7 @@ class: text-2xl
 
 # Reading (How to Use It)
 
-- Primary reading: `6.9 Persistence`
+- Primary reading: [6.9 Persistence](https://timdrichards.github.io/326/docs/readings/persistence)
 - During class: use slides for pacing + demos
 - After class: use reading sections for exam prep and reimplementation
 
@@ -120,7 +120,6 @@ class: text-2xl
 ---
 
 # Why Persistence Exists
-
 
 - Programs terminate.
 - Process memory is volatile.
@@ -787,54 +786,127 @@ Show the code for InMemory and JsonFile...
 class: text-2xl
 ---
 
-## Serialization and Type Boundaries
+### In-Memory Implementation
 
-- TypeScript types are compile-time only.
-- Stored bytes are runtime truth.
-- Validate at IO boundaries.
+Remember this from our Journal App:
 
-**Type safety in source does not guarantee validity on disk.**
+````md magic-move [02-repository-boundary/src/InMemoryEntryRepository.ts]
+```ts
+import { randomUUID } from "node:crypto";
+import { CreateEntryInput, Entry, EntryRepository } from "./EntryRepository";
 
-<p class="reading-connection">Reading connection: section 19.</p>
+export class InMemoryEntryRepository implements EntryRepository {
+  private readonly entries = new Map<string, Entry>();
+
+  async create(input: CreateEntryInput): Promise<Entry> { 
+    // ...
+  }
+
+  async findById(id: string): Promise<Entry | null> {
+    return this.entries.get(id) ?? null;
+  }
+
+  async list(): Promise<Entry[]> {
+    return Array.from(this.entries.values());
+  }
+}
+```
+```ts
+import { randomUUID } from "node:crypto";
+import { CreateEntryInput, Entry, EntryRepository } from "./EntryRepository";
+```
+```ts {4-6}
+export class InMemoryEntryRepository implements EntryRepository {
+  private readonly entries = new Map<string, Entry>();
+
+  async findById(id: string): Promise<Entry | null> {
+    return this.entries.get(id) ?? null;
+  }
+}
+```
+```ts {8-10}
+export class InMemoryEntryRepository implements EntryRepository {
+  private readonly entries = new Map<string, Entry>();
+
+  async findById(id: string): Promise<Entry | null> {
+    return this.entries.get(id) ?? null;
+  }
+
+  async list(): Promise<Entry[]> {
+    return Array.from(this.entries.values());
+  }
+}
+```
+```ts {4-13}
+export class InMemoryEntryRepository implements EntryRepository {
+  private readonly entries = new Map<string, Entry>();
+
+  async create(input: CreateEntryInput): Promise<Entry> {
+    const entry: Entry = {
+      id: randomUUID(),
+      title: input.title,
+      body: input.body,
+      createdAt: new Date().toISOString(),
+    };
+    this.entries.set(entry.id, entry);
+    return entry;
+  }
+}
+```
+````
 
 ---
-class: framed-lists-green text-2xl
+class: text-2xl
 ---
 
-## Observability + Debugging Flow
+### JSON Persistent Implementation
 
-- Log operation + id + duration + outcome.
-- Inspect stored bytes/rows immediately after write.
-- Restart process and re-read state.
+````md magic-move
+```ts
+import { promises as fs } from "node:fs";
+import { randomUUID } from "node:crypto";
+import { CreateEntryInput, Entry, EntryRepository } from "./EntryRepository";
+```
+```ts
+export class JsonFileEntryRepository implements EntryRepository {
+  constructor(private readonly filePath: string) {}
+}
+```
+```ts {2-10|12-17}
+export class JsonFileEntryRepository implements EntryRepository {
+  // A method to read all entries from persistent storage
+  private async readAll(): Promise<Entry[]> {
+    try {
+      const raw = await fs.readFile(this.filePath, "utf8");
+      return JSON.parse(raw) as Entry[];
+    } catch {
+      return [];
+    }
+  }
 
-**Without observability... <br> persistence debugging becomes guesswork.**
+  // A method to write all entries to persistent storage
+  private async writeAll(entries: Entry[]): Promise<void> {
+    const tempPath = `${this.filePath}.tmp`;
+    await fs.writeFile(tempPath, JSON.stringify(entries, null, 2), "utf8");
+    await fs.rename(tempPath, this.filePath);
+  }
+}
+```
+```ts {2-6|8-11}
+export class JsonFileEntryRepository implements EntryRepository {
+  // Look up by ID
+  async findById(id: string): Promise<Entry | null> {
+    const entries = await this.readAll();
+    return entries.find((entry) => entry.id === id) ?? null;
+  }
 
-<p class="reading-connection">Reading connection: sections 20 and 25.</p>
-
-<!--
-remove this one.
--->
-
----
-class: framed-lists-green text-2xl
----
-
-## Testing Persistence Semantics
-
-Required test layers:
-
-- Unit tests for repository behavior
-- Integration tests against real storage medium
-- Restart test proving survival across process boundary
-
-Minimal restart test pattern:
-- arrange → write → restart → assert.
-
-<p class="reading-connection">Reading connection: section 21.</p>
-
-<!--
-remove this one.
--->
+  // List all entries
+  async list(): Promise<Entry[]> {
+    return this.readAll();
+  }
+}
+```
+````
 
 ---
 class: text-2xl framed-lists-green
