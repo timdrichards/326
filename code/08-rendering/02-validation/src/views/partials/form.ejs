@@ -1,0 +1,30 @@
+<form
+  action="/validate"
+  method="post"
+  hx-post="/validate"
+  hx-target="#panel"
+  hx-swap="innerHTML"
+  style="display: grid; gap: .75rem;"
+>
+  <label style="display: grid; gap: .25rem; font-weight: 600;">
+    Username
+    <input
+      name="username"
+      value="<%= state.username %>"
+      placeholder="at least <%= minLength %> characters"
+      style="padding: .5rem .65rem; border: 1px solid <%= state.error ? '#c62828' : '#bbb' %>; border-radius: 8px; font: inherit;"
+      aria-invalid="<%= state.error ? 'true' : 'false' %>"
+      aria-describedby="<%= state.error ? 'username-error' : '' %>"
+    />
+  </label>
+
+  <% if (state.error) { %>
+    <div id="username-error" style="color: #c62828; font-size: .92rem;">
+      <%= state.error %>
+    </div>
+  <% } %>
+
+  <button type="submit" style="width: fit-content; padding: .45rem .8rem;">
+    Submit
+  </button>
+</form>

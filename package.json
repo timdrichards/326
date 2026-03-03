@@ -1,0 +1,7 @@
+{
+  "name": "326",
+  "private": true,
+  "scripts": {
+    "publish:website": "./scripts/publish-website.sh"
+  }
+}

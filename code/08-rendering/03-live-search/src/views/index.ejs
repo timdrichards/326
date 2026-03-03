@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>HTMX Live Search</title>
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <style>
+      body { font-family: system-ui, sans-serif; padding: 2rem; }
+      .box { max-width: 680px; padding: 1rem 1.25rem; border: 1px solid #ddd; border-radius: 12px; }
+      input { width: 100%; max-width: 420px; padding: .55rem .7rem; border: 1px solid #bbb; border-radius: 8px; font: inherit; }
+      .hint { color: #666; font-size: .9rem; margin-top: .75rem; }
+      code { background: #f6f6f6; border-radius: 4px; padding: .05rem .3rem; }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h1 style="margin-top: 0;">Live Search (hx-trigger)</h1>
+
+      <label for="search-box" style="display: block; font-weight: 600; margin-bottom: .35rem;">
+        Search names
+      </label>
+      <input
+        id="search-box"
+        name="q"
+        type="search"
+        placeholder="Type to search..."
+        value="<%= query %>"
+        hx-get="/search"
+        hx-trigger="keyup changed delay:300ms"
+        hx-target="#results"
+        hx-swap="innerHTML"
+      />
+
+      <div id="results" style="margin-top: .9rem;">
+        <%- include("partials/results", { query, results }) %>
+      </div>
+
+      <div class="hint">
+        Requests are driven by input events via <code>hx-trigger="keyup changed delay:300ms"</code>, but the model is still:
+        request -> server renders HTML partial -> HTMX swaps a target.
+      </div>
+    </div>
+  </body>
+</html>

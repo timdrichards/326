@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>HTMX Counter</title>
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <style>
+      body { font-family: system-ui, sans-serif; padding: 2rem; }
+      .box { display: inline-block; padding: 1rem 1.25rem; border: 1px solid #ddd; border-radius: 12px; }
+      button { margin-right: .5rem; padding: .4rem .7rem; }
+      .count { font-size: 2rem; font-weight: 700; margin: .5rem 0 0; }
+      .hint { color: #666; font-size: .9rem; margin-top: .75rem; }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div id="counter">
+        <%- include("partials/counter", { count }) %>
+      </div>
+
+      <div style="margin-top: .75rem;">
+        <button hx-post="/counter/increment" hx-target="#counter" hx-swap="innerHTML">+1</button>
+        <button hx-post="/counter/decrement" hx-target="#counter" hx-swap="innerHTML">-1</button>
+        <button hx-post="/counter/reset" hx-target="#counter" hx-swap="innerHTML">reset</button>
+      </div>
+
+      <div class="hint">
+        POST -> server renders an EJS partial -> HTMX swaps only <code>#counter</code>.
+      </div>
+    </div>
+  </body>
+</html>

@@ -25,43 +25,13 @@ By the end of this week, students should be able to:
 - use Prisma to define a schema, run migrations, and perform basic CRUD operations through a repository-style backend interface
 - evaluate tradeoffs between file-based persistence and database-backed persistence in terms of correctness, maintainability, and scalability
 
-<!-- ## Agenda
+## Lecture 6.9: Persistence
 
-### Class Meeting 1
+- <a href="/326/decks/09-persistence/" target="_blank" rel="noopener noreferrer">Slides</a>
+- [Reading](/readings/9-persistence.md)
+- <a href="/326/code/09-persistence.zip" target="_blank" rel="noopener noreferrer">Code</a>
 
-- Warm-up / review: _TBD_
-- Main topic(s): _TBD_
-- Demo / worked example: _TBD_
-- Wrap-up / check for understanding: _TBD_
+## Lecture 6.10: Repositories and ORMs
 
-### Class Meeting 2
-
-- Review / questions: _TBD_
-- Main topic(s): _TBD_
-- Guided practice / lab time: _TBD_
-- Preview of next week: _TBD_ -->
-
-## Lecture Materials
-
-- Slides: <a href="/326/decks/09-persistence/" target="_blank" rel="noopener noreferrer">09 Persistence</a>
-
-<!-- - Notes: _Add link_
-- Demo code (repo path): _Add link/path_
-- Recording (if applicable): _Add link_ -->
-
-<!-- ## In-Class Activities
-
-- Activity 1: _TBD_
-- Activity 2: _TBD_
-
-## Assignments and Deadlines
-
-- Homework released: _TBD_
-- Homework due: _TBD_
-- Reading / prep for next week: _TBD_
-
-## Instructor Notes (Optional)
-
-- What worked well: _TBD_
-- What to adjust next time: _TBD_
-- Common student misconceptions: _TBD_ -->
+- Slides (not available yet)
+- Code (not available yet)

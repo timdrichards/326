@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>HTMX Validation</title>
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <style>
+      body { font-family: system-ui, sans-serif; padding: 2rem; }
+      .box { max-width: 640px; padding: 1rem 1.25rem; border: 1px solid #ddd; border-radius: 12px; }
+      .hint { color: #666; font-size: .9rem; margin-top: .75rem; }
+      code { background: #f6f6f6; padding: .05rem .3rem; border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h1 style="margin-top: 0;">Server-Side Validation</h1>
+
+      <div id="panel">
+        <% if (typeof success !== 'undefined') { %>
+          <%- include("partials/success", success) %>
+        <% } else { %>
+          <%- include("partials/form", { state, minLength }) %>
+        <% } %>
+      </div>
+
+      <div class="hint">
+        Same HTMX mechanics: <code>hx-post</code> submits to the server, and <code>hx-target="#panel"</code> swaps in either:
+      </div>
+      <ul class="hint" style="margin-top: .3rem;">
+        <li>the form partial again (with an error message), or</li>
+        <li>a success fragment</li>
+      </ul>
+      <div class="hint" style="margin-top: .5rem;">
+        Good UX, no client framework required.
+      </div>
+    </div>
+  </body>
+</html>

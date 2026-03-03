@@ -18,7 +18,8 @@
   --ifm-footer-background-color: #eef2f6;
   --ifm-heading-color: #0f172a;
   --ifm-font-color-base: #3e4a5a;
-  --ifm-link-color: #334155;
+  --ifm-link-color: #2f7a4f;
+  --ifm-link-hover-color: #245f3d;
   --ifm-menu-color-active: #0f172a;
   --site-accent-ink: #738194;
   --site-link: #334155;
@@ -41,7 +42,8 @@
   --ifm-footer-background-color: #0e1218;
   --ifm-heading-color: #f3f6fa;
   --ifm-font-color-base: #d4dce7;
-  --ifm-link-color: #e8eef7;
+  --ifm-link-color: #73d79d;
+  --ifm-link-hover-color: #9be8bd;
   --ifm-menu-color-active: #ffffff;
   --site-accent-ink: #9eacbf;
   --site-link: #e8eef7;
@@ -115,6 +117,16 @@ body {
 .theme-doc-markdown pre,
 .theme-code-block {
   border-radius: 0.9rem;
+}
+
+.markdown a,
+.theme-doc-markdown a {
+  transition: color 150ms ease-in-out;
+}
+
+.markdown a:hover,
+.theme-doc-markdown a:hover {
+  color: var(--ifm-link-hover-color);
 }
 
 .hero__title,

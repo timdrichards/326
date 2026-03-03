@@ -1,0 +1,8 @@
+[
+  {
+    "id": "31f9d104-f4af-454f-bd0d-9b750811b405",
+    "title": "Persistent note",
+    "body": "This should remain in JSON after the process exits.",
+    "createdAt": "2026-02-28T20:25:01.692Z"
+  }
+]

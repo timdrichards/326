@@ -51,7 +51,12 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          exclude: ['**/_*.md', '**/_*.mdx'],
+          exclude: [
+            '**/_*.md',
+            '**/_*.mdx',
+            '**/excalidraw/**',
+            '**/*.excalidraw.md',
+          ],
         },
         blog: false,
         theme: { customCss: './src/css/custom.css' },

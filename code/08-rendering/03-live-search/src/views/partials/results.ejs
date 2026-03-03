@@ -1,0 +1,21 @@
+<% if (!query.trim()) { %>
+  <div style="font-size: .92rem; color: #555; margin-bottom: .5rem;">
+    Start typing to filter results (showing a few defaults).
+  </div>
+<% } else { %>
+  <div style="font-size: .92rem; color: #555; margin-bottom: .5rem;">
+    Results for "<%= query %>"
+  </div>
+<% } %>
+
+<% if (results.length === 0) { %>
+  <div style="border: 1px dashed #bbb; border-radius: 8px; padding: .7rem;">
+    No matches found.
+  </div>
+<% } else { %>
+  <ul style="margin: 0; padding-left: 1.1rem;">
+    <% for (const item of results) { %>
+      <li style="margin: .2rem 0;"><%= item %></li>
+    <% } %>
+  </ul>
+<% } %>
