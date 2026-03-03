@@ -65,6 +65,19 @@ class: text-2xl
 
 # Schedule
 
+- Homework 01 Due 3/3 at 11:59 PM
+- Homework 02 to be released Thursday
+- Exam 02 Friday in Lab
+- Exercises coming soon
+
+**See syllabus for policies around assignments.**
+
+---
+class: text-2xl
+---
+
+# Agenda
+
 - Mental model and key vocabulary
 - Runtime vs persistent demos
 - Failure + concurrency reasoning
@@ -614,7 +627,7 @@ export class CartService {
 ````
 
 <v-switch>
-  <template #0-1> <b>What</b> and <b>what</b> is the problem? </template>
+  <template #0-1> <b>What</b> is the problem? </template>
   <template #1> What happens when we run this code? </template>  
 </v-switch>
 

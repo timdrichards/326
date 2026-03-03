@@ -4,16 +4,16 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
-import {themes as prismThemes} from 'prism-react-renderer';
+import { themes as prismThemes } from 'prism-react-renderer'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-const repository = process.env.GITHUB_REPOSITORY ?? '';
-const [repoOwnerFromEnv, repoNameFromEnv] = repository.split('/');
-const organizationName = repoOwnerFromEnv || 'YOUR_GITHUB_USERNAME';
-const projectName = repoNameFromEnv || '326';
-const githubPagesUrl = `https://${organizationName}.github.io`;
-const baseUrl = process.env.DOCUSAURUS_BASE_URL ?? `/${projectName}/`;
+const repository = process.env.GITHUB_REPOSITORY ?? ''
+const [repoOwnerFromEnv, repoNameFromEnv] = repository.split('/')
+const organizationName = repoOwnerFromEnv || 'YOUR_GITHUB_USERNAME'
+const projectName = repoNameFromEnv || '326'
+const githubPagesUrl = `https://${organizationName}.github.io`
+const baseUrl = process.env.DOCUSAURUS_BASE_URL ?? `/${projectName}/`
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -93,10 +93,6 @@ const config = {
               { label: 'Course Structure', to: '/docs/course-structure' },
             ],
           },
-          {
-            title: 'Workflow',
-            items: [{ label: 'Site Workflow', to: '/docs/site-workflow' }],
-          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Tim Richards. Built with Docusaurus.`,
       },
@@ -104,4 +100,4 @@ const config = {
     }),
 }
 
-export default config;
+export default config
