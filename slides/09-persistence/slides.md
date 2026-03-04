@@ -23,6 +23,7 @@ height: 720
 margin: 0.08
 timeForPresentation: "75"
 title: "Persistence"
+favicon: /favicon.svg
 info: |
   COMPSCI 326 Web Programming
   Lecture 6.9: Persistence

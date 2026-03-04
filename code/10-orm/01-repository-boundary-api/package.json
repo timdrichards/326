@@ -1,0 +1,31 @@
+{
+  "name": "01-repository-boundary-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prisma:generate": "prisma generate",
+    "db:setup": "tsx src/dbSetup.ts",
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/src/server.js",
+    "test": "jest --runInBand"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.5.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.14",
+    "@types/supertest": "^6.0.3",
+    "jest": "^29.7.0",
+    "prisma": "^6.5.0",
+    "supertest": "^7.1.0",
+    "ts-jest": "^29.2.6",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}

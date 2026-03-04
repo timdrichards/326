@@ -81,3 +81,89 @@ This appendix provides short, beginner-friendly explanations of external calls a
 - **What it means:** Runs TypeScript files directly without manually compiling first.
 - **Short example:** `npx tsx demo.ts`
 - **Docs:** https://github.com/privatenumber/tsx
+
+## 6.10 ORM and Prisma
+
+### SQL
+- **Call/abstraction:** SQL (Structured Query Language)
+- **What it means:** The standard language for reading and changing data in relational databases.
+- **Short example:** `SELECT id, email FROM User;`
+- **Docs:** https://www.w3schools.com/sql/
+
+### SELECT
+- **Call/abstraction:** `SELECT ... FROM ...`
+- **What it means:** Reads data from one or more tables.
+- **Short example:** `SELECT title FROM Post;`
+- **Docs:** https://www.postgresql.org/docs/current/sql-select.html
+
+### WHERE
+- **Call/abstraction:** `WHERE condition`
+- **What it means:** Filters rows to only those that match a condition.
+- **Short example:** `SELECT * FROM Post WHERE authorId = 1;`
+- **Docs:** https://www.w3schools.com/sql/sql_where.asp
+
+### JOIN
+- **Call/abstraction:** `JOIN` (for example `INNER JOIN`)
+- **What it means:** Combines rows from related tables using matching key values.
+- **Short example:** `SELECT p.title, u.email FROM Post p JOIN User u ON p.authorId = u.id;`
+- **Docs:** https://www.w3schools.com/sql/sql_join.asp
+
+### Prisma Client
+- **Call/abstraction:** `new PrismaClient()`
+- **What it means:** Creates a Prisma database client instance used for queries and mutations.
+- **Short example:** `const prisma = new PrismaClient();`
+- **Docs:** https://www.prisma.io/docs/orm/prisma-client/setup-and-configuration/introduction
+
+### Prisma Create User
+- **Call/abstraction:** `prisma.user.create({ data: ... })`
+- **What it means:** Inserts one new `User` record using typed input data.
+- **Short example:** `await prisma.user.create({ data: { email: "a@school.edu" } });`
+- **Docs:** https://www.prisma.io/docs/orm/prisma-client/queries/crud#create-a-single-record
+
+### Prisma Find Many Posts
+- **Call/abstraction:** `prisma.post.findMany({ where, orderBy, ... })`
+- **What it means:** Queries multiple `Post` records with optional filters, sorting, and limits.
+- **Short example:** `await prisma.post.findMany({ where: { authorId: 1 } });`
+- **Docs:** https://www.prisma.io/docs/orm/prisma-client/queries/crud#find-all-records
+
+### Prisma Select
+- **Call/abstraction:** `select: { ... }` in Prisma queries
+- **What it means:** Chooses exactly which fields should be returned by a query.
+- **Short example:** `select: { id: true, title: true }`
+- **Docs:** https://www.prisma.io/docs/orm/prisma-client/queries/select-fields
+
+### Prisma Order By
+- **Call/abstraction:** `orderBy: { field: "asc" | "desc" }`
+- **What it means:** Sorts query results by one or more fields.
+- **Short example:** `orderBy: { createdAt: "desc" }`
+- **Docs:** https://www.prisma.io/docs/orm/prisma-client/queries/filtering-and-sorting#sorting
+
+### Prisma Known Request Error
+- **Call/abstraction:** `error instanceof Prisma.PrismaClientKnownRequestError`
+- **What it means:** A known Prisma request error type (for example unique constraint violations).
+- **Short example:** `if (error.code === "P2002") { ... }`
+- **Docs:** https://www.prisma.io/docs/orm/reference/error-reference
+
+### Prisma Transaction
+- **Call/abstraction:** `prisma.$transaction(async (tx) => { ... })`
+- **What it means:** Runs grouped database operations as a transaction (all succeed or all fail).
+- **Short example:** `await prisma.$transaction(async (tx) => { await tx.post.create(...); });`
+- **Docs:** https://www.prisma.io/docs/orm/prisma-client/queries/transactions
+
+### Express JSON Middleware
+- **Call/abstraction:** `app.use(express.json())`
+- **What it means:** Express middleware that parses incoming JSON request bodies.
+- **Short example:** `app.use(express.json())`
+- **Docs:** https://expressjs.com/en/api.html#express.json
+
+### Supertest Request
+- **Call/abstraction:** `request(app).post(...).send(...)`
+- **What it means:** Sends HTTP requests to an Express app during tests without a browser.
+- **Short example:** `const res = await request(app).get("/health");`
+- **Docs:** https://github.com/ladjs/supertest
+
+### Jest Test Functions
+- **Call/abstraction:** `describe`, `test`, `expect`
+- **What it means:** Core Jest test structure for organizing and asserting behavior.
+- **Short example:** `test("works", () => expect(1 + 1).toBe(2));`
+- **Docs:** https://jestjs.io/docs/api

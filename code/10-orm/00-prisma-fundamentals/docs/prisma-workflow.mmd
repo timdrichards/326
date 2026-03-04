@@ -1,0 +1,6 @@
+flowchart LR
+    A[schema.prisma] --> B[prisma migrate]
+    B --> C[Database Tables]
+    A --> D[prisma generate]
+    D --> E[Prisma Client in TS]
+    E --> F[Repository Methods]

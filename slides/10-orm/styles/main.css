@@ -4,11 +4,6 @@
   --c326-muted: #4b5563;
 }
 
-.slidev-layout {
-  /* Global readability baseline: hard override to roughly 2x default text */
-  font-size: 2rem !important;
-}
-
 .slidev-layout h1,
 .slidev-layout h2,
 .slidev-layout h3 {
@@ -31,7 +26,7 @@
 
 .slidev-layout p,
 .slidev-layout li {
-  font-size: 1em !important;
+  font-size: 1em;
   line-height: 1.35 !important;
 }
 

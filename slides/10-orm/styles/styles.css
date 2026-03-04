@@ -190,6 +190,14 @@ ul.ul-frame {
   font-weight: 500;
 }
 
+/* Inline emphasis tag used in slide prose (custom HTML element) */
+.slidev-layout emph {
+  font-style: normal;
+  font-weight: 400;
+  color: #16a34a;
+  opacity: 0.9;
+}
+
 .slidev-layout p.reading-connection {
   font-size: 0.56em !important;
   color: rgb(71 85 105) !important;
@@ -284,6 +292,16 @@ ul.ul-frame {
   column-gap: 2.2rem !important;
 }
 
+/* Tighten columns for the "What a Relation Is" two-column slide */
+.slidev-layout.relation-tight.two-columns {
+  column-gap: 0.8rem !important;
+}
+
+/* `layout: two-cols` uses a Tailwind grid gap utility, so override the grid gap directly */
+.slidev-layout.relation-tight .grid.grid-cols-2 {
+  gap: 0.6rem !important;
+}
+
 /* Match PPT-style density for the Community Agreement two-column slide */
 .slidev-layout.community-agreement ul {
   margin-top: 0.35rem;
@@ -320,4 +338,31 @@ ul.ul-frame {
 .slidev-layout.code-md .slidev-code {
   font-size: 1.08rem !important;
   line-height: 1.28 !important;
+}
+
+/* Smaller code-size utilities for dense slides */
+.slidev-layout.code-xs pre.shiki,
+.slidev-layout.code-xs .slidev-code,
+.slidev-layout.pre-xs pre.shiki,
+.slidev-layout.pre-xs .slidev-code {
+  font-size: 0.72rem !important;
+  line-height: 1.1 !important;
+}
+
+/* Support Slidev class placement on either page or layout wrapper */
+.slidev-page.code-xs pre.shiki,
+.slidev-page.code-xs .slidev-code,
+.slidev-page.pre-xs pre.shiki,
+.slidev-page.pre-xs .slidev-code {
+  font-size: 0.72rem !important;
+  line-height: 1.1 !important;
+}
+
+/* One-block-only utility: apply by wrapping a specific block in <div class="code-xs"> */
+.slidev-layout .code-xs pre.shiki,
+.slidev-layout .code-xs .slidev-code,
+.slidev-page .code-xs pre.shiki,
+.slidev-page .code-xs .slidev-code {
+  font-size: 0.72rem !important;
+  line-height: 1.1 !important;
 }

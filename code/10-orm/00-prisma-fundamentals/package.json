@@ -1,0 +1,26 @@
+{
+  "name": "00-prisma-fundamentals",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prisma:generate": "prisma generate",
+    "db:setup": "tsx src/dbSetup.ts",
+    "demo": "tsx src/demo.ts",
+    "test": "jest --runInBand"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.5.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.14",
+    "jest": "^29.7.0",
+    "prisma": "^6.5.0",
+    "ts-jest": "^29.2.6",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}

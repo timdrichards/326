@@ -2,3 +2,5 @@ node_modules
 dist
 slides/10-orm/node_modules/
 slides/10-orm/dist/
+code/10-orm/*/prisma/*.db
+code/10-orm/*/prisma/*.db-journal
