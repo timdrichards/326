@@ -1,6 +1,6 @@
-import {frontMatter as homework01} from '@site/docs/homework/homework-01.md';
+import {frontMatter as homework02} from '@site/docs/homework/02/02.md';
 
-const rawAssignments = [homework01];
+const rawAssignments = [homework02];
 
 const assignments = rawAssignments
   .filter(item => !item.draft && !item.unlisted)

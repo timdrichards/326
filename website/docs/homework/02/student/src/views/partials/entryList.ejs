@@ -1,0 +1,20 @@
+<% if (!entries.length) { %>
+  <p class="muted">No entries yet.</p>
+<% } %>
+
+<% entries.forEach((entry) => { %>
+  <div class="entry">
+    <div class="row" style="justify-content: space-between;">
+      <strong class="<%= entry.isCompleted ? 'done' : '' %>"><%= entry.title %></strong>
+      <form
+        hx-post="/entries/<%= entry.id %>/toggle"
+        hx-target="#entries"
+        hx-swap="innerHTML"
+      >
+        <button type="submit"><%= entry.isCompleted ? 'Undo' : 'Complete' %></button>
+      </form>
+    </div>
+    <div class="<%= entry.isCompleted ? 'done' : '' %>"><%= entry.body %></div>
+    <small class="muted">id=<%= entry.id %> created=<%= entry.createdAt %></small>
+  </div>
+<% }) %>

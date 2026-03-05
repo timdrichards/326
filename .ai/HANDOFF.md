@@ -43,3 +43,90 @@
 - If live preview appears unchanged after CSS edits, hard refresh browser (cache can mask updates).
 - Slidev generated static deck assets can produce very large diffs; confirm these are expected before future commits.
 
+
+## Session: 2026-03-05 - Homework 02 Assignment Authoring
+
+### Summary
+- Appended complete Homework 02 handout content to `website/docs/homework/02.md`.
+- Assignment integrates lecture/readings scope: rendering (HTMX), persistence boundaries, and Prisma ORM.
+- Added explicit deliverables, rubric (100 pts), submission checklist, and AI disclosure/prompt log requirements.
+
+### Workload Calibration
+- Used frontmatter dates in `02.md`:
+  - Release: 2026-03-05
+  - Due: 2026-03-24
+- Accounted for stated 7-day spring break inside window.
+- Effective working window estimated at ~12 days; assignment effort set to 10-12 hours.
+
+### Revision Note: Homework 02 Submission Format Update
+- Revised `website/docs/homework/02.md` deliverables to require exactly two Canvas uploads: `hw2-code.zip` and `hw2-writeup.pdf`.
+- Added required PDF sections with explicit prompt questions and mandatory supporting evidence (diagram + labeled screenshots).
+- Updated rubric language and submission checklist to align with PDF evidence requirements.
+
+### Note Added: ORM Notes Prisma Studio
+- Added `notes/10-orm-notes.md`.
+- Documented Prisma Studio: definition, run command (`npx prisma studio`), and course-value rationale.
+
+## Session: 2026-03-05 - HW2 Evidence Tool Scaffold + Assignment Revision
+
+### Summary
+- Added starter evidence generator script: `scripts/generate-hw2-evidence.mjs`.
+- Added root npm command: `npm run hw2:evidence`.
+- Tool now outputs:
+  - `reports/hw2-evidence.md`
+  - `reports/hw2-evidence.json`
+- Checks currently include heuristic detection for HTMX usage, routes, repository boundary, Prisma schema/client usage, tests, restart evidence, and scaffold TODO markers.
+
+### Homework Spec Revision
+- Updated `website/docs/homework/02.md` to scaffold-first workflow.
+- Changed Canvas deliverables from code zip to generated evidence report:
+  - `hw2-evidence.md`
+  - `hw2-writeup.pdf`
+- Added explicit instruction to generate evidence via `npm run hw2:evidence`.
+
+### Notes
+- This is intentionally a starter version and should be tightened once final student starter template paths/TODO tags are fixed.
+
+### Revision Note: HW2 Evidence Tool Location
+- Moved HW2 evidence generator from `scripts/generate-hw2-evidence.mjs` to `.vscode/generate-hw2-evidence.mjs`.
+- Updated npm script to keep invocation stable: `npm run hw2:evidence`.
+- Updated homework doc path `website/docs/homework/02/02.md` to explicitly mention tool location.
+
+### Revision Note: Assignment-Local HW2 Tool + Scaffold
+- Moved canonical HW2 evidence tool location to assignment-local path:
+  - `website/docs/homework/02/dist/.vscode/generate-hw2-evidence.mjs`
+- Added assignment-local `package.json` in `website/docs/homework/02/dist` with script:
+  - `npm run hw2:evidence`
+- Scaffolded starter HW2 code in `website/docs/homework/02/dist` (Express + EJS + repository boundary + Prisma schema + starter tests + README).
+- Updated homework instructions in `website/docs/homework/02/02.md` to run commands from assignment `dist` directory.
+
+### Revision Note: Hidden Evidence Output Directory
+- Updated HW2 assignment-local evidence tool to write outputs under `.reports/` instead of `reports/`.
+- Updated related docs (`website/docs/homework/02/02.md`, `website/docs/homework/02/dist/README.md`) and assignment `.gitignore` accordingly.
+- Confirmed `npm run hw2:evidence` now generates:
+  - `.reports/hw2-evidence.md`
+  - `.reports/hw2-evidence.json`
+
+### Revision Note: HW2 Zip-Based Student Workflow
+- Updated `website/docs/homework/02/02.md` to require students to download `hw-02.zip`, unzip to `hw-02/`, and run all commands from that folder.
+- Replaced prior repository-relative path references with extracted-folder references (`hw-02/.vscode/evidence.mjs`, `.reports/hw2-evidence.md`).
+
+### Revision Note: HW2 Handout Rewritten as Guided Tutorial
+- Rewrote `website/docs/homework/02/02.md` into a tutorial-style assignment with plain-language paragraph instructions.
+- Added explicit, file-by-file implementation guidance tied to scaffold files (`schema.prisma`, repositories, `app.ts`, `server.ts`, tests).
+- Updated workflow around `hw-02.zip` -> `hw-02/` extraction and assignment-local evidence generation.
+
+### Revision Note: HW2 Evidence Specificity + TA Rubric
+- Updated `website/docs/homework/02/02.md` with a required evidence list for writeup (specific screenshots + diagrams).
+- Added a pre-grading submission checklist section.
+- Replaced grading summary with TA-friendly rubric using fixed score bands per category: 0/5/10/15/20 across 5 categories (max 100).
+
+### Revision Note: Prisma 7 Config Migration in HW2 Scaffold
+- Updated `website/docs/homework/02/dist/prisma/schema.prisma` to remove datasource `url` (Prisma 7-compatible).
+- Added `website/docs/homework/02/dist/prisma.config.ts` with datasource URL via `env("DATABASE_URL")`.
+- Updated `website/docs/homework/02/dist/src/server.ts` to construct PrismaClient with SQLite adapter (`@prisma/adapter-better-sqlite3`).
+- Updated assignment scaffold dependencies in `website/docs/homework/02/dist/package.json` to Prisma 7 + adapter packages.
+- Verified by running in assignment scaffold folder:
+  - `npm install`
+  - `npm run prisma:generate` (after `.env` present)
+  - `npm run typecheck`
