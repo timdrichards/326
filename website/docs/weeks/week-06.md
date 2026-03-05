@@ -35,5 +35,6 @@ In this lecture, we learn why persistence matters in real apps: memory is tempor
 
 ## Lecture 6.10: Repositories and ORMs
 
-- Slides (not available yet)
-- Code (not available yet)
+- [Slides](pathname:///decks/10-orm/index.html)
+- [Reading](/docs/readings/orm)
+- [Code](/code/10-orm.zip)
