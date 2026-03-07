@@ -231,3 +231,20 @@
 
 ### Notes
 - Current static zip path is `website/static/code/hw-02.zip`, and the homework doc now points there correctly.
+
+## Session: 2026-03-07 - Generated HW2 Solution + TA Guide
+
+### Summary
+- Created `website/docs/homework/02/solution` as a full walkthrough-feature solution package based on the current HW2 architecture.
+- Added `website/docs/homework/02/solution/hw-02-ta-guide.md` with:
+  - requirement-to-code walkthrough,
+  - why the implementation satisfies HW requirements,
+  - common student questions with scripted answers.
+- Updated solution README wording to describe solution usage (instead of student starter wording).
+
+### Validation
+From `website/docs/homework/02/solution`:
+- `npm run prisma:generate` passed.
+- `npm run typecheck` passed.
+- `npm run test:unit` passed.
+- `npm run test:e2e` passed (memory + prisma suites).
