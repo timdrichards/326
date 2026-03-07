@@ -211,3 +211,23 @@
 
 ### Verification
 - `cd website && npm run build` passed.
+
+## Session: 2026-03-07 - HW2 Release Readiness Review
+
+### Summary
+- Reviewed `website/docs/homework/02/02.md` and student starter for release-readiness.
+- Fixed broken download link in `02.md` from `/hw-02.zip` to `/code/hw-02.zip`.
+- Re-ran site build and confirmed Docusaurus build now succeeds.
+
+### Validation Run
+- `cd website && npm run build` passed after link fix.
+- `website/docs/homework/02/student` requires setup sequence (`npm install`, copy `.env`, `npm run prisma:generate`) before tests/typecheck can run.
+- After setup, `npm run typecheck`, `npm run test:unit`, `npm run test:e2e`, and `npm run test` passed in starter.
+
+### Release Risks Found
+- `website/docs/homework/02/solution` directory is currently absent in this branch snapshot.
+- `02.md` still includes one suggested feature (status filter) that already exists in starter, which can confuse students relative to “pick a feature that does not already exist.”
+- Starter code still includes HW TODO comments in service/schema files that may conflict with prior “no TODO references” direction.
+
+### Notes
+- Current static zip path is `website/static/code/hw-02.zip`, and the homework doc now points there correctly.

@@ -20,7 +20,6 @@ class EntryService implements IEntryService {
     const body = String(input.body ?? "").trim();
     const tag = String(input.tag ?? "general").trim().toLowerCase();
 
-    // TODO(HW2): Keep this validation in service and align limits with your writeup invariants.
     if (!title || !body) {
       return Err(InvalidContent("Title and body are required."));
     }
