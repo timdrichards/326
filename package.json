@@ -2,6 +2,7 @@
   "name": "326",
   "private": true,
   "scripts": {
+    "publish": "./scripts/publish-website.sh",
     "publish:website": "./scripts/publish-website.sh"
   }
 }

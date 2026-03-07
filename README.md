@@ -52,7 +52,7 @@ Pushes to `main` trigger a deploy.
 From the repo root, run:
 
 ```bash
-npm run publish:website
+npm run publish
 ```
 
-This forwards to the `website` publish pipeline, which generates homework zip files and runs Docusaurus deploy.
+This command runs the full publish workflow: website build (including homework zip generation), `git add`, commit, push to `main`, and optional tag creation/push.
