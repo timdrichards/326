@@ -1,8 +1,13 @@
+import { Result } from "../lib/result.js";
+import { EntryError } from "../lib/errors.js";
+
+// Canonical entry shape used by controllers/views.
 export type Entry = {
   id: number;
   title: string;
   body: string;
-  isCompleted: boolean;
+  tag: string;
+  status: string;
   createdAt: string;
   updatedAt: string;
 };
@@ -10,11 +15,15 @@ export type Entry = {
 export type CreateEntryInput = {
   title: string;
   body: string;
+  tag?: string;
 };
 
-export interface EntryRepository {
-  create(input: CreateEntryInput): Promise<Entry>;
-  list(): Promise<Entry[]>;
-  findById(id: number): Promise<Entry | null>;
-  toggleComplete(id: number): Promise<Entry | null>;
+// Repository contract: storage operations with explicit success/error values.
+export interface IEntryRepository {
+  add(input: CreateEntryInput): Promise<Result<Entry, EntryError>>;
+  getById(id: number): Promise<Result<Entry, EntryError>>;
+  getAll(): Promise<Result<Entry[], EntryError>>;
+  search(query: string): Promise<Result<Entry[], EntryError>>;
+  filterByStatus(status: "all" | "active" | "completed"): Promise<Result<Entry[], EntryError>>;
+  toggleById(id: number): Promise<Result<Entry, EntryError>>;
 }

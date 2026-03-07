@@ -1,44 +1,92 @@
-import type { CreateEntryInput, Entry, EntryRepository } from "./EntryRepository.js";
+import { Err, Ok, Result } from "../lib/result.js";
+import { EntryError, EntryNotFound, ValidationError } from "../lib/errors.js";
+import { CreateEntryInput, Entry, IEntryRepository } from "./EntryRepository.js";
 
-export class InMemoryEntryRepository implements EntryRepository {
-  private readonly entries = new Map<number, Entry>();
+// In-memory repository used for fast local development and mode switching.
+class InMemoryEntryRepository implements IEntryRepository {
+  private entries: Entry[] = [];
   private nextId = 1;
 
-  async create(input: CreateEntryInput): Promise<Entry> {
-    // TODO(HW2): Enforce your invariants before persisting.
+  async add(input: CreateEntryInput): Promise<Result<Entry, EntryError>> {
+    const title = String(input.title ?? "").trim();
+    const body = String(input.body ?? "").trim();
+    const tag = String(input.tag ?? "general").trim().toLowerCase();
+
+    if (!title || !body) {
+      // Repository guard in case service-level validation is bypassed.
+      return Err(ValidationError("Repository received empty title or body."));
+    }
+
     const now = new Date().toISOString();
     const entry: Entry = {
       id: this.nextId++,
-      title: input.title,
-      body: input.body,
-      isCompleted: false,
+      title,
+      body,
+      tag,
+      status: "active",
       createdAt: now,
       updatedAt: now,
     };
 
-    this.entries.set(entry.id, entry);
-    return entry;
+    this.entries.push(entry);
+    return Ok(entry);
   }
 
-  async list(): Promise<Entry[]> {
-    return Array.from(this.entries.values()).sort((a, b) => b.id - a.id);
+  async getById(id: number): Promise<Result<Entry, EntryError>> {
+    const found = this.entries.find(entry => entry.id === id);
+    if (!found) {
+      return Err(EntryNotFound(`Entry with id ${id} not found.`));
+    }
+    return Ok(found);
   }
 
-  async findById(id: number): Promise<Entry | null> {
-    return this.entries.get(id) ?? null;
+  async getAll(): Promise<Result<Entry[], EntryError>> {
+    return Ok([...this.entries].sort((a, b) => b.id - a.id));
   }
 
-  async toggleComplete(id: number): Promise<Entry | null> {
-    const existing = this.entries.get(id);
-    if (!existing) return null;
+  async search(query: string): Promise<Result<Entry[], EntryError>> {
+    const q = query.trim().toLowerCase();
+    if (!q) {
+      return this.getAll();
+    }
 
+    const filtered = this.entries
+      .filter(entry => `${entry.title} ${entry.body} ${entry.tag}`.toLowerCase().includes(q))
+      .sort((a, b) => b.id - a.id);
+
+    return Ok(filtered);
+  }
+
+  async filterByStatus(status: "all" | "active" | "completed"): Promise<Result<Entry[], EntryError>> {
+    if (status === "all") {
+      return this.getAll();
+    }
+
+    const filtered = this.entries
+      .filter(entry => entry.status === status)
+      .sort((a, b) => b.id - a.id);
+
+    return Ok(filtered);
+  }
+
+  async toggleById(id: number): Promise<Result<Entry, EntryError>> {
+    const foundIndex = this.entries.findIndex(entry => entry.id === id);
+    if (foundIndex < 0) {
+      return Err(EntryNotFound(`Entry with id ${id} not found.`));
+    }
+
+    const current = this.entries[foundIndex];
     const updated: Entry = {
-      ...existing,
-      isCompleted: !existing.isCompleted,
+      ...current,
+      status: current.status === "completed" ? "active" : "completed",
       updatedAt: new Date().toISOString(),
     };
 
-    this.entries.set(id, updated);
-    return updated;
+    this.entries[foundIndex] = updated;
+    return Ok(updated);
   }
+}
+
+export function CreateInMemoryEntryRepository(): IEntryRepository {
+  return new InMemoryEntryRepository();
 }

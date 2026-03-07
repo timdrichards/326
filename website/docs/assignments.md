@@ -4,4 +4,6 @@ sidebar_position: 5
 
 # Assignments
 
-See Canvas.
+## Homework
+
+- [Homework 02: Rendering & Persistence](./homework/02/02.md)

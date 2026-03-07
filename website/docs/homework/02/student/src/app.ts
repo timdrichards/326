@@ -1,58 +1,113 @@
 import path from "node:path";
-import express from "express";
-import type { EntryRepository } from "./repository/EntryRepository.js";
+import express, { Request, RequestHandler, Response } from "express";
+import Layouts from "express-ejs-layouts";
+import { IApp } from "./contracts.js";
+import { IEntryController } from "./controller/EntryController.js";
+import { ILoggingService } from "./service/LoggingService.js";
 
-export function createApp(repo: EntryRepository) {
-  const app = express();
+// Async handler wrapper so route methods can use await safely.
+type AsyncRequestHandler = RequestHandler;
 
-  app.set("view engine", "ejs");
-  app.set("views", path.join(process.cwd(), "src/views"));
-  app.use(express.urlencoded({ extended: true }));
+function asyncHandler(fn: AsyncRequestHandler) {
+  return function wrapped(req: Request, res: Response, next: (value?: unknown) => void) {
+    return Promise.resolve(fn(req, res, next)).catch(next);
+  };
+}
 
-  app.get("/", async (_req, res) => {
-    const entries = await repo.list();
-    res.render("index", { entries });
-  });
+class ExpressApp implements IApp {
+  private readonly app: express.Express;
 
-  app.post("/entries", async (req, res) => {
-    // TODO(HW2): Strengthen validation + return consistent error fragment.
-    const title = String(req.body.title ?? "").trim();
-    const body = String(req.body.body ?? "").trim();
+  constructor(
+    private readonly controller: IEntryController,
+    private readonly logger: ILoggingService,
+  ) {
+    this.app = express();
+    this.registerMiddleware();
+    this.registerTemplating();
+    this.registerRoutes();
+  }
 
-    if (!title || !body) {
-      return res.status(400).render("partials/error", {
-        message: "Title and body are required.",
-      });
-    }
+  private registerMiddleware(): void {
+    // Static assets + form parser + layout support.
+    this.app.use(express.static(path.join(process.cwd(), "static")));
+    this.app.use(Layouts);
+    this.app.use(express.urlencoded({ extended: true }));
+  }
 
-    await repo.create({ title, body });
-    const entries = await repo.list();
-    return res.render("partials/entryList", { entries });
-  });
+  private registerTemplating(): void {
+    this.app.set("view engine", "ejs");
+    this.app.set("views", path.join(process.cwd(), "src/views"));
+    this.app.set("layout", "layouts/base");
+  }
 
-  app.post("/entries/:id/toggle", async (req, res) => {
-    const id = Number(req.params.id);
-    if (!Number.isInteger(id)) {
-      return res.status(400).render("partials/error", { message: "Invalid ID." });
-    }
+  private registerRoutes(): void {
+    // Routes stay thin: parse request input, then delegate to controller.
+    this.app.get(
+      "/",
+      asyncHandler(async (_req, res) => {
+        this.logger.info("GET /");
+        res.redirect("/entries");
+      }),
+    );
 
-    await repo.toggleComplete(id);
-    const entries = await repo.list();
-    return res.render("partials/entryList", { entries });
-  });
+    this.app.get(
+      "/entries",
+      asyncHandler(async (_req, res) => {
+        this.logger.info("GET /entries");
+        await this.controller.showEntries(res);
+      }),
+    );
 
-  app.get("/entries/search", async (req, res) => {
-    // TODO(HW2): Replace this with repository-backed filtering if you add it.
-    const q = String(req.query.q ?? "").trim().toLowerCase();
-    const entries = await repo.list();
-    const filtered = q
-      ? entries.filter((e) =>
-          `${e.title} ${e.body}`.toLowerCase().includes(q),
-        )
-      : entries;
+    this.app.post(
+      "/entries/new",
+      asyncHandler(async (req, res) => {
+        const title = typeof req.body.title === "string" ? req.body.title : "";
+        const body = typeof req.body.body === "string" ? req.body.body : "";
+        const tag = typeof req.body.tag === "string" ? req.body.tag : "general";
+        await this.controller.createFromForm(res, title, body, tag);
+      }),
+    );
 
-    return res.render("partials/entryList", { entries: filtered });
-  });
+    this.app.post(
+      "/entries/:id/toggle",
+      asyncHandler(async (req, res) => {
+        const id = Number(req.params.id);
+        if (!Number.isInteger(id) || id <= 0) {
+          res.status(400).render("entries/partials/error", { message: "Invalid ID." });
+          return;
+        }
+        await this.controller.toggleFromForm(res, id);
+      }),
+    );
 
-  return app;
+    this.app.get(
+      "/entries/search",
+      asyncHandler(async (req, res) => {
+        const q = typeof req.query.q === "string" ? req.query.q : "";
+        await this.controller.searchFromHtmx(res, q);
+      }),
+    );
+
+    this.app.get(
+      "/entries/filter",
+      asyncHandler(async (req, res) => {
+        const status = typeof req.query.status === "string" ? req.query.status : "";
+        await this.controller.filterFromHtmx(res, status);
+      }),
+    );
+
+    this.app.use((err: unknown, _req: Request, res: Response, _next: (value?: unknown) => void) => {
+      const message = err instanceof Error ? err.message : "Unexpected server error.";
+      this.logger.error(message);
+      res.status(500).render("entries/partials/error", { message: "Unexpected server error." });
+    });
+  }
+
+  getExpressApp(): express.Express {
+    return this.app;
+  }
+}
+
+export function CreateApp(controller: IEntryController, logger: ILoggingService): IApp {
+  return new ExpressApp(controller, logger);
 }

@@ -1,0 +1,23 @@
+<h2>All Entries</h2>
+<ul>
+  <% if (!entries.length) { %>
+    <li>No entries yet.</li>
+  <% } %>
+
+  <% entries.forEach((entry) => { %>
+    <li>
+      <strong><%= entry.title %></strong> (<%= entry.tag %>) <em>[<%= entry.status %>]</em>
+      <br />
+      <span><%= entry.body %></span>
+      <br />
+      <small>id=<%= entry.id %> created=<%= entry.createdAt %></small>
+      <form
+        hx-post="/entries/<%= entry.id %>/toggle"
+        hx-target="#entries-panel"
+        hx-swap="innerHTML"
+      >
+        <button type="submit"><%= entry.status === "completed" ? "Mark Active" : "Mark Completed" %></button>
+      </form>
+    </li>
+  <% }) %>
+</ul>

@@ -1,9 +1,9 @@
-# HW2 Starter Scaffold
+# HW2 Student Starter
 
 ## Quick Start
 
 ```bash
-cd website/docs/homework/02/dist
+cd hw-02
 npm install
 cp .env.example .env
 npm run prisma:generate
@@ -13,31 +13,33 @@ npm run dev
 
 This starter uses Prisma config in `prisma.config.ts` (Prisma 7 style).
 
-Use `REPO_MODE=memory` (default) or `REPO_MODE=prisma`:
+Use `REPO_MODE=memory` (default) or `REPO_MODE=prisma` by editing `.env`:
 
 ```bash
-REPO_MODE=prisma npm run dev
+# in .env
+REPO_MODE=prisma
 ```
 
-## Required HW2 TODO markers
+## Architecture Pattern (Matches class journal app)
 
-Search for:
+This starter mirrors the class structure for result and error handling:
+
+- `src/lib/result.ts` -> `Ok/Err/Result` types
+- `src/lib/errors.ts` -> typed domain errors
+- `src/service/EntryService.ts` -> validation and domain rules
+- `src/controller/EntryController.ts` -> maps Result errors to HTTP behavior
+- `src/repository/*` -> storage behind repository boundary
+
+## Test Scaffolding
+
+Starter test files are included and should be extended:
+
+- `tests/unit/entry-service.unit.test.ts` (Jest unit tests)
+- `tests/e2e/entries.e2e.test.ts` (Jest + Supertest route tests)
+
+Run:
 
 ```bash
-rg "TODO\(HW2\)|HW2-TODO"
+npm run test:unit
+npm run test:e2e
 ```
-
-Complete all required TODOs before submission.
-
-## Evidence Report
-
-Generate with:
-
-```bash
-npm run hw2:evidence
-```
-
-Outputs:
-
-- `.reports/hw2-evidence.md`
-- `.reports/hw2-evidence.json`

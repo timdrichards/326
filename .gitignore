@@ -1,4 +1,5 @@
 **/node_modules/
+**/solution/
 dist
 slides/10-orm/node_modules/
 slides/10-orm/dist/

@@ -33,3 +33,26 @@ Rationale: prevents unintended sizing changes across all blocks on a slide.
 
 Rationale: avoided line-wrap overlap and visual artifacts seen with boxed highlight styles.
 
+
+## 2026-03-06 - HW2 Student Scaffold Should Mirror Journal-App Error/Result Architecture
+
+- Homework 02 starter code should model the same explicit `Result` + typed error handling flow taught in the class journal-app across repository, service, and controller layers.
+- Keep app/server boundaries explicit in starter code (`IApp`/`IServer` + server composition root) so students preserve architectural seams while implementing homework features.
+
+Rationale: this aligns assessment with demonstrated class implementation patterns and reduces ambiguity in grading expectations.
+
+## 2026-03-06 - HW2 Test Guidance Uses Jest + Supertest Scaffold
+
+- Homework 02 student starter should use Jest for unit verification and Supertest for route/e2e verification.
+- Assignment instructions should direct students to extend provided unit/e2e scaffold files rather than writing from a single placeholder test script.
+- Tests remain student-owned verification practice and are not graded as a standalone scoring category.
+
+Rationale: aligns assignment expectations with a standard Node testing workflow while preserving open-ended implementation freedom.
+
+## 2026-03-06 - HW2 No Longer Uses Generated Evidence Report Submission
+
+- Homework 02 submission no longer includes generated `.reports/hw2-evidence.md` artifacts.
+- Required submission is now `hw2-code.zip` plus `hw2-writeup.pdf`.
+- Remove evidence generation scripts/tools from assignment scaffold to avoid conflicting instructions.
+
+Rationale: simplify student workflow and keep grading focused on code + writeup evidence.

@@ -1,0 +1,66 @@
+<h1>Homework 2 Entries</h1>
+
+<p>Use this starter to implement the results-and-errors pattern from class. Keep controller and service behavior aligned with the journal app style.</p>
+
+<% if (pageError) { %>
+  <%- include("partials/error", { message: pageError }) %>
+<% } %>
+
+<form
+  hx-post="/entries/new"
+  hx-target="#entries-panel"
+  hx-swap="innerHTML"
+>
+  <label for="title">Title</label>
+  <input id="title" name="title" required />
+
+  <label for="body">Body</label>
+  <textarea id="body" name="body" rows="5" required></textarea>
+
+  <label for="tag">Tag</label>
+  <input id="tag" name="tag" placeholder="general" />
+
+  <button type="submit">Create Entry</button>
+</form>
+
+<p>
+  <label for="search">Search</label>
+  <input
+    id="search"
+    name="q"
+    placeholder="search title/body/tag"
+    hx-get="/entries/search"
+    hx-trigger="keyup changed delay:300ms"
+    hx-target="#entries-panel"
+    hx-swap="innerHTML"
+  />
+</p>
+
+<p>
+  <strong>Status Filter:</strong>
+  <button
+    hx-get="/entries/filter?status=all"
+    hx-target="#entries-panel"
+    hx-swap="innerHTML"
+  >
+    All
+  </button>
+  <button
+    hx-get="/entries/filter?status=active"
+    hx-target="#entries-panel"
+    hx-swap="innerHTML"
+  >
+    Active
+  </button>
+  <button
+    hx-get="/entries/filter?status=completed"
+    hx-target="#entries-panel"
+    hx-swap="innerHTML"
+  >
+    Completed
+  </button>
+</p>
+
+<section id="entries-panel">
+  <%- include("partials/entryList", { entries }) %>
+</section>

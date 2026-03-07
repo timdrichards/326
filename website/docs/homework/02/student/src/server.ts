@@ -1,26 +1,24 @@
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import { PrismaClient } from "@prisma/client";
-import { createApp } from "./app.js";
-import { InMemoryEntryRepository } from "./repository/InMemoryEntryRepository.js";
-import { PrismaEntryRepository } from "./repository/PrismaEntryRepository.js";
+import "dotenv/config";
+import type { IApp, IServer } from "./contracts.js";
+import { createComposedApp } from "./composition.js";
 
-async function main() {
-  const mode = process.env.REPO_MODE ?? "memory";
-  const port = Number(process.env.PORT ?? 3000);
+// Runtime HTTP server boundary.
+export class HttpServer implements IServer {
+  constructor(private readonly app: IApp) {}
 
-  const repo = (() => {
-    if (mode !== "prisma") return new InMemoryEntryRepository();
-
-    const url = process.env.DATABASE_URL ?? "file:./prisma/dev.db";
-    const adapter = new PrismaBetterSqlite3({ url });
-    return new PrismaEntryRepository(new PrismaClient({ adapter }));
-  })();
-
-  const app = createApp(repo);
-  app.listen(port, () => {
-    // eslint-disable-next-line no-console
-    console.log(`HW2 starter running on http://localhost:${port} (repo=${mode})`);
-  });
+  start(port: number): void {
+    const expressApp = this.app.getExpressApp();
+    expressApp.listen(port, () => {
+      // eslint-disable-next-line no-console
+      console.log(`HW2 starter running on http://localhost:${port}`);
+    });
+  }
 }
 
-void main();
+// Process startup: choose repository mode, compose app, then listen.
+const mode = process.env.REPO_MODE === "prisma" ? "prisma" : "memory";
+const port = Number(process.env.PORT ?? 3000);
+const app = createComposedApp(mode);
+const server = new HttpServer(app);
+
+server.start(port);

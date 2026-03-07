@@ -10,9 +10,10 @@ model Entry {
   id          Int      @id @default(autoincrement())
   title       String
   body        String
-  isCompleted Boolean  @default(false)
+  tag         String   @default("general")
+  status      String   @default("active")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  // TODO(HW2): Add at least one additional field or invariant-related constraint.
+  // TODO(HW2): Add at least one additional model-level choice tied to your invariants.
 }

@@ -130,3 +130,84 @@
   - `npm install`
   - `npm run prisma:generate` (after `.env` present)
   - `npm run typecheck`
+
+## Session: 2026-03-06 - HW2 Student Scaffold Journal-App Parity Pass
+
+### Summary
+- Aligned `website/docs/homework/02/student` more closely with the class `journal-app` architecture emphasis around explicit `Result`/typed error flow.
+- Updated student scaffold runtime boundary to mirror class pattern:
+  - added `IServer` in `src/contracts.ts`
+  - introduced `HttpServer` in `src/server.ts` and kept composition root explicit.
+- Updated student logging service behavior to match class implementation style:
+  - ISO timestamp + level format
+  - singleton `CreateLoggingService()` factory.
+- Updated assignment docs wording in `website/docs/homework/02/02.md` to explicitly require journal-app-style result/error mapping at the controller boundary.
+- Updated TA guide (`website/docs/homework/02/solution/hw2-ta-guide.md`) to call out composition-boundary parity checks in grading.
+
+### Verification
+- `cd website/docs/homework/02/student && npm run typecheck` passed.
+- `cd website && npm run build` passed.
+
+## Session: 2026-03-06 - HW2 Testing Stack Migration to Jest + Supertest
+
+### Summary
+- Revised `website/docs/homework/02/02.md` testing guidance to use Jest for unit testing and Supertest for route/e2e testing.
+- Added per-step verification guidance that references `npm run test:unit` in early validation and `npm run test:e2e` after route work.
+- Updated Step 8 to require extending scaffolded Jest/Supertest tests instead of a single placeholder test file.
+
+### Scaffold Changes (student starter)
+- Replaced one-off placeholder test with scaffolded test structure:
+  - `tests/unit/entry-service.unit.test.ts`
+  - `tests/e2e/entries.e2e.test.ts`
+- Added Jest config:
+  - `jest.config.cjs`
+- Updated `package.json` scripts:
+  - `test`, `test:unit`, `test:e2e`
+- Added test dependencies:
+  - `jest`, `ts-jest`, `supertest`, `@types/jest`, `@types/supertest`
+- Updated `tsconfig.json` for Jest typing + isolated modules.
+- Updated `student/README.md` to document new test scaffolding and commands.
+
+### Verification
+- `cd website/docs/homework/02/student && npm run typecheck` passed.
+- `cd website/docs/homework/02/student && npm run test` passed.
+- `cd website && npm run build` passed.
+
+## Session: 2026-03-06 - HW2 errors.ts Relocated to src/lib
+
+### Summary
+- Moved HW2 student starter error definitions from `src/service/errors.ts` to `src/lib/errors.ts`.
+- Updated all student starter imports to new path.
+- Updated assignment and TA docs that referenced the old path.
+
+### Verification
+- `cd website/docs/homework/02/student && npm run typecheck` passed.
+- `cd website/docs/homework/02/student && npm run test` passed.
+
+## Session: 2026-03-06 - HW2 Evidence Tool Removal + Submission Format Revert
+
+### Summary
+- Removed HW2 generated evidence-report workflow from assignment docs and scaffold.
+- Updated `website/docs/homework/02/02.md` to remove Step 9 evidence generation and renumber PDF step.
+- Changed Canvas submission requirements back to two files:
+  - `hw2-code.zip`
+  - `hw2-writeup.pdf`
+- Removed all references to `.reports/hw2-evidence.md` and `npm run hw2:evidence`.
+
+### Repository Cleanup
+- Removed evidence scripts from:
+  - `website/docs/homework/02/student/package.json`
+  - `website/docs/homework/02/solution/package.json`
+- Deleted evidence tool files:
+  - `website/docs/homework/02/student/.vscode/evidence.mjs`
+  - `website/docs/homework/02/solution/.vscode/evidence.mjs`
+- Deleted generated student report artifacts:
+  - `website/docs/homework/02/student/.reports/hw2-evidence.md`
+  - `website/docs/homework/02/student/.reports/hw2-evidence.json`
+- Updated related docs:
+  - `website/docs/homework/02/student/README.md`
+  - `website/docs/homework/02/solution/README.md`
+  - `website/docs/homework/02/solution/hw2-ta-guide.md`
+
+### Verification
+- `cd website && npm run build` passed.
