@@ -56,3 +56,12 @@ Rationale: aligns assignment expectations with a standard Node testing workflow 
 - Remove evidence generation scripts/tools from assignment scaffold to avoid conflicting instructions.
 
 Rationale: simplify student workflow and keep grading focused on code + writeup evidence.
+
+## 2026-03-07 - Homework Code Archives are Generated from docs/homework/*/student
+
+- Canonical source for downloadable homework starter zips is `website/docs/homework/<nn>/student`.
+- Generated output path is `website/static/code/hw-<nn>.zip`.
+- Archive generation excludes local/runtime artifacts: `node_modules`, `dist`, `build`, `.env`, and `*.db`.
+- Zip generation is integrated into `website` scripts for `start`, `build`, and deploy/publish flows.
+
+Rationale: ensures downloadable starter archives stay synchronized with assignment folders and avoids shipping machine-specific or bulky artifacts.

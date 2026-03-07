@@ -5,37 +5,40 @@ This website is built using [Docusaurus](https://docusaurus.io/), a modern stati
 ## Installation
 
 ```bash
-yarn
+npm install
 ```
 
 ## Local Development
 
 ```bash
-yarn start
+npm start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+This command starts a local development server. It also runs homework zip watch mode so changes in `docs/homework/*/student` regenerate matching files in `static/code/`.
 
 ## Build
 
 ```bash
-yarn build
+npm run build
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+This command generates homework zips first, then builds static content into `build/`.
+
+## Homework zip generation
+
+Homework zip files are generated from `docs/homework/<nn>/student` to `static/code/hw-<nn>.zip`.
+
+- Run once: `npm run zip:homework`
+- Watch for changes: `npm run zip:homework:watch`
+
+The zip process excludes: `node_modules`, `dist`, `build`, `.env`, and `*.db`.
 
 ## Deployment
 
-Using SSH:
+Use:
 
 ```bash
-USE_SSH=true yarn deploy
+npm run deploy
 ```
 
-Not using SSH:
-
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+`deploy` also runs homework zip generation before publishing.

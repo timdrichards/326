@@ -3,11 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "zip:homework": "node scripts/zip-homework.mjs",
+    "zip:homework:watch": "node scripts/zip-homework.mjs --watch",
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
+    "start": "concurrently -n ZIP,DOCS \"npm:zip:homework:watch\" \"docusaurus start\"",
+    "build": "npm run zip:homework && docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
+    "deploy": "npm run zip:homework && docusaurus deploy",
+    "publish:site": "npm run zip:homework && docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
@@ -25,7 +28,9 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.9.2",
-    "@docusaurus/types": "3.9.2"
+    "@docusaurus/types": "3.9.2",
+    "chokidar": "^5.0.0",
+    "concurrently": "^9.2.1"
   },
   "browserslist": {
     "production": [

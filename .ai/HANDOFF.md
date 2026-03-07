@@ -248,3 +248,23 @@ From `website/docs/homework/02/solution`:
 - `npm run typecheck` passed.
 - `npm run test:unit` passed.
 - `npm run test:e2e` passed (memory + prisma suites).
+
+## Session: 2026-03-07 - Added Automatic Homework Zip Pipeline
+
+### Summary
+- Added `website/scripts/zip-homework.mjs` to package each `docs/homework/<nn>/student` folder into `static/code/hw-<nn>.zip`.
+- Zipping stages each homework in a temporary `hw-<nn>` folder before archive creation.
+- Exclusion rules implemented: `node_modules`, `dist`, `build`, `.env`, and `*.db`.
+
+### Script Wiring
+Updated `website/package.json`:
+- `zip:homework`: one-shot zip generation.
+- `zip:homework:watch`: watch mode for homework changes.
+- `start`: runs zipper watch in parallel with `docusaurus start`.
+- `build`: runs zipper before Docusaurus build.
+- `deploy` and `publish:site`: run zipper before deploy.
+
+### Validation
+- `cd website && npm run zip:homework` passed and produced `website/static/code/hw-02.zip`.
+- Verified zip content excludes `.env`, `.db`, `node_modules`, `dist`, and `build`.
+- `cd website && npm run build` passed with pre-zip step.
