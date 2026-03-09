@@ -1,5 +1,37 @@
 # Session Handoffs
 
+## Session: 2026-03-09 - Identity Slide Deck Generation
+
+### Summary
+- Created `slides/11-identity/slides.md` as the new Slidev deck for Lecture 6.11: Identity, Credentials, and Session Establishment.
+- Matched the deck structure and formatting conventions from the previous lecture deck in the same folder.
+- Incorporated the revised outline, including:
+  - connection to ORM/persistence boundary
+  - stateless-vs-session flow explanation
+  - explicit cookie/session-id/session-store scaffolding before Activity 1
+  - Express session middleware + minimal route example
+  - session store and security fundamentals
+  - two single-slide paper-and-pencil in-class activities with shared prompts for the entire class
+- Reused the existing ORM boundary image and Mermaid/text diagrams; no new Excalidraw or PNG assets were needed for this deck.
+
+### Verification
+- Ran `cd slides/11-identity && npm install` to restore local Slidev dependencies.
+- Ran `cd slides/11-identity && npm run build -- slides.md` successfully.
+
+## Session: 2026-03-09 - Identity Lecture Outline Activity Revision
+
+### Summary
+- Revised `slides/11-identity/lecture-outline.md` to replace the single coding exercise with two spaced paper-and-pencil in-class activities.
+- Added Activity 1 early in the lecture as a continuity-channel puzzle where students complete and debug a browser/server request flow.
+- Kept the existing discussion point and placed it after the first activity so students reason about the design before moving into session vocabulary and mechanics.
+- Added Activity 2 later in the lecture as a session-failure detective exercise focused on restart behavior, multi-instance behavior, and unsafe session contents.
+- Rebalanced the 75-minute timing notes to preserve the lecture -> activity -> lecture -> activity -> wrap-up structure.
+- Refined both activities so they can run from a single slide each with one shared problem for the entire class and no handouts.
+- Added explicit pre-activity scaffolding requirements so future slide generation includes the concrete facts students need on-screen to solve both activities.
+
+### Verification
+- Re-read the updated outline to confirm both activities are paper-and-pencil, appear in different parts of the class, and the discussion point remains included.
+
 ## Session: 2026-03-09 - HW2 Student Clean Script
 
 ### Summary
