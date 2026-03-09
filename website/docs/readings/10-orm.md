@@ -468,6 +468,42 @@ This mapping is important because it proves continuity from database fundamental
 
 If you ever feel lost in syntax, return to the core terms from sections 6 through 12.
 
+### Invariant Notation We Will Use Going Forward
+
+At this point, we should make one idea explicit from first principles: constraints in schema and checks in services/repositories are both enforcing **invariants**. An invariant is a rule that must stay true after every valid write and every valid state transition.
+
+To make invariants clear and reviewable, we will use this notation throughout the course:
+
+`INV-<number>: IF <condition>, THEN <required rule>, BECAUSE <why this rule matters>.`
+
+You can also include short examples:
+
+`Pass example: <valid case>`
+
+`Fail example: <invalid case>`
+
+Here are concrete ORM-related examples:
+
+`INV-1: IF a new User is created, THEN email must be unique, BECAUSE identity-by-email must not collide across accounts.`
+
+`Pass example: creating user with a new email succeeds.`
+
+`Fail example: creating user with an email already in User table triggers a uniqueness error.`
+
+`INV-2: IF a Post row exists, THEN authorId must reference a valid User id, BECAUSE every post must have a real author in canonical state.`
+
+`Pass example: create Post with existing authorId=1 succeeds.`
+
+`Fail example: create Post with missing authorId reference fails relation/foreign-key expectation.`
+
+`INV-3: IF the same domain action is executed through different persistence implementations, THEN visible behavior must match, BECAUSE repository boundaries should be storage-agnostic.`
+
+`Pass example: memory-backed and Prisma-backed create/list flows return equivalent domain results.`
+
+`Fail example: memory mode accepts invalid data that Prisma mode rejects (or vice versa).`
+
+The key engineering point is this: writing invariants first tells you what to encode in schema, what to validate in service/repository code, and what tests you must write.
+
 ## 19. SQL Thinking to Prisma Thinking
 
 File: `10-orm/00-prisma-fundamentals/src/sqlToPrisma.ts`
@@ -606,6 +642,8 @@ It is also worth noticing that repository methods return domain-relevant values 
 This class shows the exact continuity from lecture 6.9. We still keep persistence operations in a dedicated boundary. Routes and controllers do not need to know detailed query options or transaction composition. That separation improves testing and keeps code easier to evolve.
 
 Prisma is not the boundary. Prisma is a tool _inside_ the boundary.
+
+This is also where your invariant notation becomes practical. Schema-level constraints (`@unique`, relations, non-null fields) and service/repository checks should be read together as one invariant enforcement system, not as separate disconnected steps.
 
 ## 25. Express Request Flow with Prisma
 

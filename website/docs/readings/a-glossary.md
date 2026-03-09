@@ -119,3 +119,77 @@ A **transaction** is a group of operations treated as one unit of work.
 Either all operations commit, or none do.
 
 Transactions are used to preserve consistency when multiple writes must succeed together.
+
+## Identity
+
+**Identity** is the subject the system believes it is interacting with.
+
+In web apps, this is often a user account, but the same concept applies to other subject types.
+
+## Credential
+
+A **credential** is evidence presented to support an identity claim.
+
+Examples include passwords, one-time codes, and external provider tokens.
+
+## Session
+
+A **session** is server-recognized continuity state across multiple HTTP requests.
+
+Sessions let the server treat a sequence of requests as belonging to one ongoing browser context.
+
+## Session Identifier
+
+A **session identifier** (session ID) is an opaque token used to look up session state.
+
+It should not expose sensitive meaning and should not be treated as a user ID.
+
+## Session Establishment
+
+**Session establishment** is the process of creating session state and linking it to the browser, usually by sending a cookie.
+
+## Session Store
+
+A **session store** is the storage mechanism used for session records.
+
+In-memory stores are simple but volatile. Durable stores (for example database-backed) support continuity across restart.
+
+## Session Fixation
+
+**Session fixation** is an attack pattern where a victim is forced to use a session ID known to an attacker.
+
+A common mitigation is regenerating session IDs at sensitive transitions.
+
+## Session Hijacking
+
+**Session hijacking** is unauthorized reuse of a valid session token.
+
+Mitigations include secure transport, safe cookie attributes, expiration policy, and invalidation behavior.
+
+## Cookie
+
+A **cookie** is a browser-stored key/value value sent automatically on matching HTTP requests.
+
+Cookies are often used to carry session identifiers.
+
+## HttpOnly
+
+**HttpOnly** is a cookie attribute that prevents direct JavaScript access to that cookie in the browser.
+
+This helps reduce some token theft vectors.
+
+## SameSite
+
+**SameSite** is a cookie attribute controlling cross-site cookie sending behavior.
+
+Common values are `Lax`, `Strict`, and `None`.
+
+## Secure Cookie
+
+**Secure** is a cookie attribute that sends the cookie only over HTTPS connections.
+
+## Expiration (Session)
+
+Session **expiration** is the rule that a session is no longer valid after a defined time condition (for example `expiresAt`).
+
+Expired sessions should not be treated as valid continuity.

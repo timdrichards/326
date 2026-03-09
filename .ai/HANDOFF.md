@@ -268,3 +268,32 @@ Updated `website/package.json`:
 - `cd website && npm run zip:homework` passed and produced `website/static/code/hw-02.zip`.
 - Verified zip content excludes `.env`, `.db`, `node_modules`, `dist`, and `build`.
 - `cd website && npm run build` passed with pre-zip step.
+
+## Session: 2026-03-07 - Drafted Lecture 11 Identity Outline
+
+### Summary
+- Added `slides/11-identity/lecture-outline.md` using `design-template.md` numbering style.
+- Kept items 1-3 (Title, Community Agreement, Schedule) as requested.
+- Dropped template items 4-5.
+- Produced a 20-slide max outline focused on sessions:
+  - why sessions exist,
+  - what HTTP does not provide,
+  - how sessions work in Express.
+- Placed a 5-minute discussion slide near the end and a longer in-class activity before wrap-up/conclusion.
+- Included timing notes targeting a 75-minute class with buffer.
+
+## Session: 2026-03-07 - Polished Reading 11 + Moved Appendices to Shared Files
+
+### Summary
+- Performed second-pass style revision on `website/docs/readings/11-identity.md` to better match `10-orm.md` narrative style.
+- Added concrete mini-scenarios and expanded code walkthrough commentary in key implementation sections.
+- Removed embedded appendix sections from chapter body.
+- Added shared appendix pointers in chapter:
+  - `./a-glossary.md`
+  - `./b-code-reference.md`
+- Added 6.11 session terms to shared glossary and code reference:
+  - `website/docs/readings/a-glossary.md`
+  - `website/docs/readings/b-code-reference.md`
+
+### Validation
+- `cd website && npm run build` passed after updates.

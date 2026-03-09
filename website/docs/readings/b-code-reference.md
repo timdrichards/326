@@ -167,3 +167,71 @@ This appendix provides short, beginner-friendly explanations of external calls a
 - **What it means:** Core Jest test structure for organizing and asserting behavior.
 - **Short example:** `test("works", () => expect(1 + 1).toBe(2));`
 - **Docs:** https://jestjs.io/docs/api
+
+## 6.11 Identity, Credentials, and Session Establishment
+
+### express-session Middleware
+- **Call/abstraction:** `app.use(session({...}))`
+- **What it means:** Registers middleware that creates/loads session context per request.
+- **Short example:** `app.use(session({ secret: "dev", resave: false, saveUninitialized: false }));`
+- **Docs:** https://github.com/expressjs/session
+
+### req.session
+- **Call/abstraction:** `req.session`
+- **What it means:** Request-scoped handle to session state managed by session middleware.
+- **Short example:** `req.session.userId = 42;`
+- **Docs:** https://github.com/expressjs/session#reqsession
+
+### req.session.destroy
+- **Call/abstraction:** `req.session.destroy(callback)`
+- **What it means:** Destroys the current session record and invalidates continuity.
+- **Short example:** `req.session.destroy(() => res.redirect("/"));`
+- **Docs:** https://github.com/expressjs/session#sessiondestroycallback
+
+### res.cookie
+- **Call/abstraction:** `res.cookie(name, value, options)`
+- **What it means:** Sets a response cookie. Commonly used to attach continuity/session identifiers.
+- **Short example:** `res.cookie("sid", sessionId, { httpOnly: true, sameSite: "lax" });`
+- **Docs:** https://expressjs.com/en/api.html#res.cookie
+
+### Set-Cookie Header
+- **Call/abstraction:** `Set-Cookie` response header
+- **What it means:** Instructs browser to store/update cookie state.
+- **Short example:** `Set-Cookie: sid=abc123; HttpOnly; SameSite=Lax`
+- **Docs:** https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
+
+### Cookie Header
+- **Call/abstraction:** `Cookie` request header
+- **What it means:** Browser-sent cookie values for matching requests.
+- **Short example:** `Cookie: sid=abc123`
+- **Docs:** https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie
+
+### localStorage
+- **Call/abstraction:** `window.localStorage`
+- **What it means:** Browser key/value storage that persists across browser restarts for same origin.
+- **Short example:** `localStorage.setItem("draftTitle", "Week notes");`
+- **Docs:** https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+
+### sessionStorage
+- **Call/abstraction:** `window.sessionStorage`
+- **What it means:** Browser key/value storage scoped to a tab/session.
+- **Short example:** `sessionStorage.setItem("step", "2");`
+- **Docs:** https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage
+
+### Prisma DateTime Filters (for expiry checks)
+- **Call/abstraction:** `where: { expiresAt: { gt: new Date() } }`
+- **What it means:** Filters records based on DateTime comparisons, useful for valid-session queries.
+- **Short example:** `await prisma.session.findMany({ where: { expiresAt: { gt: new Date() } } });`
+- **Docs:** https://www.prisma.io/docs/orm/prisma-client/queries/filtering-and-sorting
+
+### Prisma upsert
+- **Call/abstraction:** `prisma.model.upsert({ where, update, create })`
+- **What it means:** Update if record exists, otherwise create. Useful for some session metadata patterns.
+- **Short example:** `await prisma.session.upsert({ where: { id }, update: {...}, create: {...} });`
+- **Docs:** https://www.prisma.io/docs/orm/prisma-client/queries/crud#update-or-create-records
+
+### Supertest Agent (cookie persistence in tests)
+- **Call/abstraction:** `request.agent(app)`
+- **What it means:** Keeps cookies between requests in tests so you can test session continuity.
+- **Short example:** `const agent = request.agent(app); await agent.post("/login"); await agent.get("/entries");`
+- **Docs:** https://github.com/ladjs/supertest

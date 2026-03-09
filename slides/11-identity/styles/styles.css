@@ -1,0 +1,368 @@
+/* style.css */
+.asciinema-wrapper {
+  min-height: 300px;
+  width: 100%;
+}
+
+/* Larger code blocks for the entire deck */
+pre.shiki,
+.slidev-code {
+  font-size: 1rem !important;
+  line-height: 1.25 !important;
+  margin-bottom: 0.7rem;
+}
+
+.monaco-editor .view-lines {
+  font-size: 18px !important;
+  line-height: 1.25 !important;
+}
+
+.slidev-layout p {
+  line-height: 1.35;
+}
+
+/* Smaller inline code (backticks) without affecting fenced code blocks */
+.slidev-layout :not(pre) > code {
+  font-size: 1em !important;
+  font-family: Consolas, "Courier New", monospace !important;
+  font-weight: 600 !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.callout {
+  padding: 0.8rem 1rem;
+  border-left: 6px solid #2563eb;
+  background: #eff6ff;
+  border-radius: 0.5rem;
+  margin: 0.8rem 0;
+}
+
+.callout-warn {
+  border-left-color: #d97706;
+  background: #fffbeb;
+}
+
+.callout-danger {
+  border-left-color: #dc2626;
+  background: #fef2f2;
+}
+
+.sticky-note {
+  background: #fef3a5;
+  border: 1px solid #f2db72;
+  border-radius: 12px;
+  color: #4a3b11;
+  padding: 0.95rem 1.1rem;
+  margin: 0.9rem 0;
+}
+
+.callout-gap-top {
+  margin-top: 1.6rem !important;
+}
+
+/* Framed unordered list with configurable border vars */
+ul.ul-frame {
+  --ul-border-rgb: 37 99 235;
+  --ul-border-opacity: 0.35;
+  --ul-border-width: 2px;
+  --ul-radius: 12px;
+  --ul-pad-y: 0.8rem;
+  --ul-pad-x: 1.1rem;
+
+  border: var(--ul-border-width) solid rgb(var(--ul-border-rgb) / var(--ul-border-opacity));
+  border-radius: var(--ul-radius);
+  padding: var(--ul-pad-y) var(--ul-pad-x) var(--ul-pad-y) calc(var(--ul-pad-x) + 1rem);
+  margin: 0.8rem 0;
+}
+
+/* Apply framed list style to every UL on selected slide classes.
+   Use descendant selectors because Slidev wraps content in nested containers. */
+.slidev-layout.framed-lists ul,
+.slidev-layout.framed-lists-blue ul,
+.slidev-layout.framed-lists-green ul,
+.slidev-layout.framed-lists-red ul,
+.slidev-layout.framed-lists-gray ul,
+.slidev-layout.framed-lists-amber ul,
+.slidev-layout.framed-lists-purple ul {
+  --ul-border-rgb: 37 99 235; /* default blue */
+  --ul-border-opacity: 0.35;
+  --ul-border-width: 2px;
+  --ul-radius: 12px;
+  --ul-pad-y: 0.8rem;
+  --ul-pad-x: 1.1rem;
+
+  border: var(--ul-border-width) solid rgb(var(--ul-border-rgb) / var(--ul-border-opacity));
+  border-radius: var(--ul-radius);
+  padding: var(--ul-pad-y) var(--ul-pad-x) var(--ul-pad-y) calc(var(--ul-pad-x) + 1rem);
+  margin: 0.8rem 0;
+}
+
+.slidev-layout.framed-lists-blue ul {
+  --ul-border-rgb: 37 99 235;
+}
+
+.slidev-layout.framed-lists-green ul {
+  --ul-border-rgb: 22 163 74;
+}
+
+.slidev-layout.framed-lists-red ul {
+  --ul-border-rgb: 220 38 38;
+}
+
+.slidev-layout.framed-lists-gray ul {
+  --ul-border-rgb: 75 85 99;
+}
+
+.slidev-layout.framed-lists-amber ul {
+  --ul-border-rgb: 217 119 6;
+}
+
+.slidev-layout.framed-lists-purple ul {
+  --ul-border-rgb: 126 34 206;
+}
+
+/* Ensure consistent title-to-body spacing across all H1 slides */
+.slidev-layout h1 + * {
+  margin-top: 1.25rem !important;
+}
+
+/* Match spacing behavior for H2 titles as well */
+.slidev-layout h2 + * {
+  margin-top: 1.25rem !important;
+}
+
+/* Default subtitle style for first paragraph after an H1 */
+.slidev-layout h1 + p {
+  font-size: 1.5rem;
+  opacity: 0.5;
+  line-height: 2rem;
+  margin-top: 1.25rem !important;
+  margin-bottom: 1.5rem;
+}
+
+.slidev-layout h2 + p {
+  margin-top: 1.25rem !important;
+}
+
+/* Direct heading spacing fallback for layouts where body is not an adjacent sibling */
+.slidev-layout h1,
+.slidev-layout h2 {
+  margin-bottom: 1.25rem !important;
+}
+
+/* two-cols-header uses separate grid rows for title and body */
+.slidev-layout.two-cols-header {
+  row-gap: 1.25rem !important;
+}
+
+/* Guaranteed separation between header row and body row in two-cols-header */
+.slidev-layout.two-cols-header .col-header {
+  padding-bottom: 1.25rem !important;
+}
+
+/* Reusable tighter header spacing for dense slides */
+.slidev-layout.title-tight.two-cols-header {
+  row-gap: 0.08rem !important;
+}
+
+.slidev-layout.title-tight.two-cols-header .col-header {
+  padding-bottom: 0.08rem !important;
+}
+
+/* Compact top spacing for dense exercise slide while retaining small title gap */
+.slidev-layout.exercise-compact {
+  padding-top: 0.95rem !important;
+}
+
+.slidev-layout.exercise-compact .col-header h2,
+.slidev-layout.exercise-compact .col-header h1 {
+  margin-bottom: 0.3rem !important;
+}
+
+.sentence-emphasis {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid rgb(59 130 246 / 0.28);
+  background: rgb(59 130 246 / 0.09);
+  border-radius: 0.45rem;
+  color: rgb(30 58 138 / 0.92);
+  font-weight: 500;
+}
+
+/* Inline emphasis tag used in slide prose (custom HTML element) */
+.slidev-layout emph {
+  font-style: normal;
+  font-weight: 400;
+  color: #16a34a;
+  opacity: 0.9;
+}
+
+.slidev-layout p.reading-connection {
+  font-size: 0.56em !important;
+  color: rgb(71 85 105) !important;
+  opacity: 0.58;
+  margin: 0 !important;
+  line-height: 1.1 !important;
+  position: absolute;
+  left: 3.5rem;
+  right: 3.5rem;
+  bottom: 0.45rem;
+  pointer-events: none;
+}
+
+.slidev-layout.two-columns.cols-60-40 {
+  grid-template-columns: 1.5fr 1fr !important;
+}
+.slidev-layout.two-cols-header.cols-60-40 {
+  grid-template-columns: 1.5fr 1fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-60-40) {
+  grid-template-columns: 1.5fr 1fr !important;
+}
+
+.slidev-layout.two-columns.cols-67-33 {
+  grid-template-columns: 2fr 1fr !important;
+}
+.slidev-layout.two-cols-header.cols-67-33 {
+  grid-template-columns: 2fr 1fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-67-33) {
+  grid-template-columns: 2fr 1fr !important;
+}
+
+.slidev-layout.two-columns.cols-70-30 {
+  grid-template-columns: 2.333fr 1fr !important;
+}
+.slidev-layout.two-cols-header.cols-70-30 {
+  grid-template-columns: 2.333fr 1fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-70-30) {
+  grid-template-columns: 2.333fr 1fr !important;
+}
+
+.slidev-layout.two-columns.cols-75-25 {
+  grid-template-columns: 3fr 1fr !important;
+}
+.slidev-layout.two-cols-header.cols-75-25 {
+  grid-template-columns: 3fr 1fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-75-25) {
+  grid-template-columns: 3fr 1fr !important;
+}
+
+.slidev-layout.two-columns.cols-40-60 {
+  grid-template-columns: 1fr 1.5fr !important;
+}
+.slidev-layout.two-cols-header.cols-40-60 {
+  grid-template-columns: 1fr 1.5fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-40-60) {
+  grid-template-columns: 1fr 1.5fr !important;
+}
+
+.slidev-layout.two-columns.cols-30-70 {
+  grid-template-columns: 1fr 2.333fr !important;
+}
+.slidev-layout.two-cols-header.cols-30-70 {
+  grid-template-columns: 1fr 2.333fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-30-70) {
+  grid-template-columns: 1fr 2.333fr !important;
+}
+
+.slidev-layout.two-columns.cols-33-67 {
+  grid-template-columns: 1fr 2fr !important;
+}
+.slidev-layout.two-cols-header.cols-33-67 {
+  grid-template-columns: 1fr 2fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-33-67) {
+  grid-template-columns: 1fr 2fr !important;
+}
+
+/* Slightly wider gutter between columns for readability */
+.slidev-layout.two-columns,
+.slidev-layout.two-cols-header {
+  column-gap: 1.6rem !important;
+}
+
+/* Extra separation for dense definition content on this slide */
+.slidev-layout.precise-definition {
+  column-gap: 2.2rem !important;
+}
+
+/* Tighten columns for the "What a Relation Is" two-column slide */
+.slidev-layout.relation-tight.two-columns {
+  column-gap: 0.8rem !important;
+}
+
+/* `layout: two-cols` uses a Tailwind grid gap utility, so override the grid gap directly */
+.slidev-layout.relation-tight .grid.grid-cols-2 {
+  gap: 0.6rem !important;
+}
+
+/* Match PPT-style density for the Community Agreement two-column slide */
+.slidev-layout.community-agreement ul {
+  margin-top: 0.35rem;
+  line-height: 1.16 !important;
+}
+
+.slidev-layout.community-agreement h1 {
+  margin-bottom: 1.75rem;
+}
+
+.slidev-layout.community-agreement li {
+  margin: 0.22rem 0;
+}
+
+.slidev-layout.community-agreement h3 {
+  margin-top: 0;
+  margin-bottom: 0.35rem;
+  line-height: 1;
+}
+
+/* Reusable text density utilities */
+.slidev-layout.body-sm p,
+.slidev-layout.body-sm li {
+  font-size: 0.9em !important;
+}
+
+.slidev-layout.body-tight p,
+.slidev-layout.body-tight li {
+  line-height: 1.26 !important;
+}
+
+/* Reusable code-size utility for slides that need a slight bump */
+.slidev-layout.code-md pre.shiki,
+.slidev-layout.code-md .slidev-code {
+  font-size: 1.08rem !important;
+  line-height: 1.28 !important;
+}
+
+/* Smaller code-size utilities for dense slides */
+.slidev-layout.code-xs pre.shiki,
+.slidev-layout.code-xs .slidev-code,
+.slidev-layout.pre-xs pre.shiki,
+.slidev-layout.pre-xs .slidev-code {
+  font-size: 0.72rem !important;
+  line-height: 1.1 !important;
+}
+
+/* Support Slidev class placement on either page or layout wrapper */
+.slidev-page.code-xs pre.shiki,
+.slidev-page.code-xs .slidev-code,
+.slidev-page.pre-xs pre.shiki,
+.slidev-page.pre-xs .slidev-code {
+  font-size: 0.72rem !important;
+  line-height: 1.1 !important;
+}
+
+/* One-block-only utility: apply by wrapping a specific block in <div class="code-xs"> */
+.slidev-layout .code-xs pre.shiki,
+.slidev-layout .code-xs .slidev-code,
+.slidev-page .code-xs pre.shiki,
+.slidev-page .code-xs .slidev-code {
+  font-size: 0.72rem !important;
+  line-height: 1.1 !important;
+}
