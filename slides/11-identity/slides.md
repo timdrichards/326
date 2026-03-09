@@ -132,30 +132,16 @@ between request 1 and request 2
 
 ---
 layout: two-cols
-class: text-xl cols-67-33
+class: text-xl cols-75-25
 ---
 
 ## Stateless vs Session-Based Request Flow
 
-```mermaid
-flowchart TD
-  subgraph A[Stateless]
-    A1["Browser -> GET /dashboard"] --> A2["Server handles request"]
-    A2 --> A3["No durable per-browser link"]
-  end
-
-  subgraph B[Session-Based]
-    B1["Login request with credentials"] --> B2["Server verifies credentials"]
-    B2 --> B3["Server creates session record"]
-    B3 --> B4["Response sets cookie: sid=sess_7F3A"]
-    B4 --> B5["Later request sends cookie back"]
-    B5 --> B6["Server reads sid and loads session data"]
-  end
-```
-
 <div class="callout">
 The browser stores a small token. The server stores the session data. The token links them.
 </div>
+
+![alt text](/images/stateless-vs-sessions.png)
 
 ::right::
 
@@ -165,6 +151,25 @@ The browser stores a small token. The server stores the session data. The token 
   <li>Server uses that id to look up session state.</li>
   <li>Continuity fails when those pieces do not match.</li>
 </ul>
+
+---
+class: text-xl
+---
+
+
+<p>
+The browser stores a small token. The server stores the session data. The token links them.
+<ul>
+  <li>Browser can store a cookie.</li>
+  <li>Cookie should carry an opaque session id.</li>
+  <li>Server uses that id to look up session state.</li>
+  <li>Continuity fails when those pieces do not match.</li>
+</ul>
+</p>
+
+<img src="/images/stateless-vs-sessions.png" style="width: 100%; max-width: none;" />
+
+
 
 ---
 layout: two-cols-header

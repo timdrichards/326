@@ -211,7 +211,8 @@ ul.ul-frame {
   pointer-events: none;
 }
 
-.slidev-layout.two-columns.cols-60-40 {
+.slidev-layout.two-columns.cols-60-40,
+.slidev-layout.two-cols.cols-60-40 {
   grid-template-columns: 1.5fr 1fr !important;
 }
 .slidev-layout.two-cols-header.cols-60-40 {
@@ -221,7 +222,8 @@ ul.ul-frame {
   grid-template-columns: 1.5fr 1fr !important;
 }
 
-.slidev-layout.two-columns.cols-67-33 {
+.slidev-layout.two-columns.cols-67-33,
+.slidev-layout.two-cols.cols-67-33 {
   grid-template-columns: 2fr 1fr !important;
 }
 .slidev-layout.two-cols-header.cols-67-33 {
@@ -231,7 +233,8 @@ ul.ul-frame {
   grid-template-columns: 2fr 1fr !important;
 }
 
-.slidev-layout.two-columns.cols-70-30 {
+.slidev-layout.two-columns.cols-70-30,
+.slidev-layout.two-cols.cols-70-30 {
   grid-template-columns: 2.333fr 1fr !important;
 }
 .slidev-layout.two-cols-header.cols-70-30 {
@@ -241,7 +244,8 @@ ul.ul-frame {
   grid-template-columns: 2.333fr 1fr !important;
 }
 
-.slidev-layout.two-columns.cols-75-25 {
+.slidev-layout.two-columns.cols-75-25,
+.slidev-layout.two-cols.cols-75-25 {
   grid-template-columns: 3fr 1fr !important;
 }
 .slidev-layout.two-cols-header.cols-75-25 {
@@ -251,7 +255,8 @@ ul.ul-frame {
   grid-template-columns: 3fr 1fr !important;
 }
 
-.slidev-layout.two-columns.cols-40-60 {
+.slidev-layout.two-columns.cols-40-60,
+.slidev-layout.two-cols.cols-40-60 {
   grid-template-columns: 1fr 1.5fr !important;
 }
 .slidev-layout.two-cols-header.cols-40-60 {
@@ -261,7 +266,8 @@ ul.ul-frame {
   grid-template-columns: 1fr 1.5fr !important;
 }
 
-.slidev-layout.two-columns.cols-30-70 {
+.slidev-layout.two-columns.cols-30-70,
+.slidev-layout.two-cols.cols-30-70 {
   grid-template-columns: 1fr 2.333fr !important;
 }
 .slidev-layout.two-cols-header.cols-30-70 {
@@ -271,7 +277,8 @@ ul.ul-frame {
   grid-template-columns: 1fr 2.333fr !important;
 }
 
-.slidev-layout.two-columns.cols-33-67 {
+.slidev-layout.two-columns.cols-33-67,
+.slidev-layout.two-cols.cols-33-67 {
   grid-template-columns: 1fr 2fr !important;
 }
 .slidev-layout.two-cols-header.cols-33-67 {
