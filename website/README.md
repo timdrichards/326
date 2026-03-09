@@ -31,7 +31,7 @@ Homework zip files are generated from `docs/homework/<nn>/student` to `static/co
 - Run once: `npm run zip:homework`
 - Watch for changes: `npm run zip:homework:watch`
 
-The zip process excludes: `node_modules`, `dist`, `build`, `.env`, and `*.db`.
+The zip process excludes: `node_modules`, `dist`, `build`, `prisma/migrations`, `.env`, and `*.db`.
 
 ## Deployment
 

@@ -1,5 +1,61 @@
 # Session Handoffs
 
+## Session: 2026-03-09 - HW2 Student Clean Script
+
+### Summary
+- Added `npm run clean` to `website/docs/homework/02/student/package.json`.
+- Switched the script to `rimraf` so it is cross-platform, including Windows.
+- The script removes local generated artifacts from the starter:
+  - `node_modules`
+  - `dist`
+  - `build`
+  - `.env`
+  - `prisma/*.db`
+  - `prisma/*.db-journal`
+  - `prisma/migrations`
+- Updated the student README to document the reset command.
+
+### Verification
+- Refreshed starter dependencies with `npm install` so local `rimraf` was available.
+- Ran `npm run clean` in `website/docs/homework/02/student`.
+- Confirmed `node_modules`, `.env`, `*.db`, and `prisma/migrations` were removed.
+
+## Session: 2026-03-09 - HW2 Form Reset After Successful Create
+
+### Summary
+- Updated `website/docs/homework/02/student/src/views/entries/index.ejs` so the create-entry form resets Title, Body, and Tag after a successful HTMX POST to `/entries/new`.
+- Used `hx-on::after-request` on the form so failed validation responses do not clear user input.
+
+### Verification
+- `cd website && npm run build` passed.
+
+## Session: 2026-03-09 - Homework Zip Exclusion for Prisma Migrations
+
+### Summary
+- Updated `website/scripts/zip-homework.mjs` so generated homework starter archives now exclude any `prisma/migrations` directory under `docs/homework/<nn>/student`.
+- Kept existing exclusions for `node_modules`, `dist`, `build`, `.env`, and `*.db`.
+- Updated durable docs to reflect the new exclusion list.
+
+### Verification
+- `cd website && npm run zip:homework` passed.
+- Confirmed `website/static/code/hw-02.zip` does not contain `prisma/migrations`, `node_modules`, `dist`, `build`, `.env`, or `*.db` entries.
+
+## Session: 2026-03-09 - HW2 Student UI Glass Styling Pass
+
+### Summary
+- Reworked `website/docs/homework/02/student` starter UI from minimal default controls into a structured glass-style interface.
+- Added layout/component hooks in EJS templates for:
+  - hero/header panel
+  - create-entry card
+  - search/filter toolbar
+  - card-style entry list
+  - styled error panel
+- Replaced `student/static/styles.css` with a cohesive visual system using soft gradients, frosted panels, rounded controls, segmented filters, and responsive behavior.
+
+### Verification
+- `cd website && npm run build` passed.
+- `cd website/docs/homework/02/student && npm run typecheck` could not run in this environment because local `tsc` was not installed in that folder.
+
 ## Session: 2026-03-05 - ORM Lecture Buildout and Slidev Refinements
 
 ### Summary

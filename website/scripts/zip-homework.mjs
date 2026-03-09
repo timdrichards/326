@@ -10,6 +10,7 @@ const HOMEWORK_ROOT = path.join(ROOT, "docs", "homework");
 const OUTPUT_ROOT = path.join(ROOT, "static", "code");
 
 const EXCLUDED_DIRS = new Set(["node_modules", "dist", "build"]);
+const EXCLUDED_PATH_SEGMENTS = [["prisma", "migrations"]];
 
 function isExcludedFile(name) {
   if (name === ".env") return true;
@@ -25,7 +26,14 @@ async function exists(target) {
   }
 }
 
-async function copyFiltered(sourceDir, targetDir) {
+function hasExcludedPathPrefix(relativePath) {
+  const segments = path.normalize(relativePath).split(path.sep).filter(Boolean);
+  return EXCLUDED_PATH_SEGMENTS.some(excludedSegments =>
+    excludedSegments.every((segment, index) => segments[index] === segment),
+  );
+}
+
+async function copyFiltered(rootDir, sourceDir, targetDir) {
   await fs.mkdir(targetDir, { recursive: true });
   const entries = await fs.readdir(sourceDir, { withFileTypes: true });
 
@@ -35,7 +43,9 @@ async function copyFiltered(sourceDir, targetDir) {
 
     if (entry.isDirectory()) {
       if (EXCLUDED_DIRS.has(entry.name)) continue;
-      await copyFiltered(sourcePath, targetPath);
+      const relativeSourcePath = path.relative(rootDir, sourcePath);
+      if (hasExcludedPathPrefix(relativeSourcePath)) continue;
+      await copyFiltered(rootDir, sourcePath, targetPath);
       continue;
     }
 
@@ -91,7 +101,7 @@ async function zipSingleHomework(homeworkDirName) {
   const stagingDir = path.join(tmpRoot, folderName);
 
   try {
-    await copyFiltered(studentDir, stagingDir);
+    await copyFiltered(studentDir, studentDir, stagingDir);
     await fs.rm(outputZipPath, { force: true });
     await runZip(tmpRoot, outputZipPath, folderName);
     const relPath = path.relative(ROOT, outputZipPath);
@@ -145,6 +155,7 @@ async function startWatchMode() {
       /node_modules/,
       /[\\/]dist[\\/]/,
       /[\\/]build[\\/]/,
+      /[\\/]prisma[\\/]migrations([\\/]|$)/,
       /\.db$/,
       /[\\/]\.env$/,
     ],

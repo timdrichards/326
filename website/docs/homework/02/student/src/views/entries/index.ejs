@@ -1,66 +1,95 @@
-<h1>Homework 2 Entries</h1>
-
-<p>Use this starter to implement the results-and-errors pattern from class. Keep controller and service behavior aligned with the journal app style.</p>
+<section class="hero glass-panel">
+  <p class="eyebrow">Homework 02</p>
+  <h1>Entries Dashboard</h1>
+  <p class="hero-copy">
+    Use this starter to implement add a new feature.
+  </p>
+</section>
 
 <% if (pageError) { %>
   <%- include("partials/error", { message: pageError }) %>
 <% } %>
 
-<form
-  hx-post="/entries/new"
-  hx-target="#entries-panel"
-  hx-swap="innerHTML"
->
-  <label for="title">Title</label>
-  <input id="title" name="title" required />
+<section class="workspace-grid">
+  <section class="glass-panel control-panel">
+    <div class="panel-header">
+      <h2>Create Entry</h2>
+      <p>Capture a title, body, and tag. The starter routes already support HTMX updates.</p>
+    </div>
 
-  <label for="body">Body</label>
-  <textarea id="body" name="body" rows="5" required></textarea>
+    <form
+      class="entry-form"
+      hx-post="/entries/new"
+      hx-target="#entries-panel"
+      hx-swap="innerHTML"
+      hx-on::after-request="if (event.detail.successful) this.reset()"
+    >
+      <label for="title">Title</label>
+      <input id="title" name="title" required />
 
-  <label for="tag">Tag</label>
-  <input id="tag" name="tag" placeholder="general" />
+      <label for="body">Body</label>
+      <textarea id="body" name="body" rows="5" required></textarea>
 
-  <button type="submit">Create Entry</button>
-</form>
+      <label for="tag">Tag</label>
+      <input id="tag" name="tag" placeholder="general" />
 
-<p>
-  <label for="search">Search</label>
-  <input
-    id="search"
-    name="q"
-    placeholder="search title/body/tag"
-    hx-get="/entries/search"
-    hx-trigger="keyup changed delay:300ms"
-    hx-target="#entries-panel"
-    hx-swap="innerHTML"
-  />
-</p>
+      <button type="submit">Create Entry</button>
+    </form>
+  </section>
 
-<p>
-  <strong>Status Filter:</strong>
-  <button
-    hx-get="/entries/filter?status=all"
-    hx-target="#entries-panel"
-    hx-swap="innerHTML"
-  >
-    All
-  </button>
-  <button
-    hx-get="/entries/filter?status=active"
-    hx-target="#entries-panel"
-    hx-swap="innerHTML"
-  >
-    Active
-  </button>
-  <button
-    hx-get="/entries/filter?status=completed"
-    hx-target="#entries-panel"
-    hx-swap="innerHTML"
-  >
-    Completed
-  </button>
-</p>
+  <section class="glass-panel entries-panel">
+    <div class="panel-header">
+      <h2>Browse Entries</h2>
+      <p>Search live or filter by status. Each action swaps the list panel with HTMX.</p>
+    </div>
 
-<section id="entries-panel">
-  <%- include("partials/entryList", { entries }) %>
+    <div class="toolbar">
+      <label class="search-field" for="search">
+        <span>Search</span>
+        <input
+          id="search"
+          name="q"
+          placeholder="search title/body/tag"
+          hx-get="/entries/search"
+          hx-trigger="keyup changed delay:300ms"
+          hx-target="#entries-panel"
+          hx-swap="innerHTML"
+        />
+      </label>
+
+      <div class="filter-group" aria-label="Status Filter">
+        <span class="filter-label">Status</span>
+        <div class="segmented-control">
+          <button
+            type="button"
+            hx-get="/entries/filter?status=all"
+            hx-target="#entries-panel"
+            hx-swap="innerHTML"
+          >
+            All
+          </button>
+          <button
+            type="button"
+            hx-get="/entries/filter?status=active"
+            hx-target="#entries-panel"
+            hx-swap="innerHTML"
+          >
+            Active
+          </button>
+          <button
+            type="button"
+            hx-get="/entries/filter?status=completed"
+            hx-target="#entries-panel"
+            hx-swap="innerHTML"
+          >
+            Completed
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <section id="entries-panel">
+      <%- include("partials/entryList", { entries }) %>
+    </section>
+  </section>
 </section>

@@ -61,7 +61,7 @@ Rationale: simplify student workflow and keep grading focused on code + writeup 
 
 - Canonical source for downloadable homework starter zips is `website/docs/homework/<nn>/student`.
 - Generated output path is `website/static/code/hw-<nn>.zip`.
-- Archive generation excludes local/runtime artifacts: `node_modules`, `dist`, `build`, `.env`, and `*.db`.
+- Archive generation excludes local/runtime artifacts: `node_modules`, `dist`, `build`, `prisma/migrations`, `.env`, and `*.db`.
 - Zip generation is integrated into `website` scripts for `start`, `build`, and deploy/publish flows.
 
 Rationale: ensures downloadable starter archives stay synchronized with assignment folders and avoids shipping machine-specific or bulky artifacts.

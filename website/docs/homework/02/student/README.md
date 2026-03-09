@@ -43,3 +43,11 @@ Run:
 npm run test:unit
 npm run test:e2e
 ```
+
+## Reset Generated Files
+
+To remove installed dependencies and local runtime artifacts created while working on the app, run:
+
+```bash
+npm run clean
+```

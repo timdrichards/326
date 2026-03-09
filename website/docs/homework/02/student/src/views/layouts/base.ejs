@@ -8,9 +8,13 @@
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
   </head>
   <body>
-    <nav class="main-nav">
-      <a href="/entries">Entries</a>
-    </nav>
-    <main><%- body %></main>
+    <div class="page-shell">
+      <div class="page-glow page-glow-one" aria-hidden="true"></div>
+      <div class="page-glow page-glow-two" aria-hidden="true"></div>
+      <nav class="main-nav glass-panel">
+        <a href="/entries" class="nav-brand">Entries</a>
+      </nav>
+      <main class="app-shell"><%- body %></main>
+    </div>
   </body>
 </html>
