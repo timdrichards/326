@@ -10,7 +10,7 @@ const SOURCE_ROOTS = {
   lectures: path.join(REPO_ROOT, "course", "lectures"),
   assignments: path.join(REPO_ROOT, "course", "assignments", "homework"),
   weeks: path.join(REPO_ROOT, "course", "weeks"),
-  sharedReadings: path.join(REPO_ROOT, "course", "shared", "readings"),
+  readings: path.join(REPO_ROOT, "course", "readings"),
 };
 
 const TARGET_ROOTS = {
@@ -53,10 +53,6 @@ async function copyDirContents(source, target) {
   }
 }
 
-function readingDocNameFromLectureSlug(slug) {
-  return slug.replace(/^0(\d-)/, "$1");
-}
-
 async function syncWeeks() {
   await resetDir(TARGET_ROOTS.weeks);
   const files = (await fs.readdir(SOURCE_ROOTS.weeks))
@@ -70,48 +66,7 @@ async function syncWeeks() {
 
 async function syncReadings() {
   await resetDir(TARGET_ROOTS.readings);
-  await ensureDir(path.join(TARGET_ROOTS.readings, "images"));
-  await ensureDir(path.join(TARGET_ROOTS.readings, "excalidraw"));
-
-  const sharedFiles = (await fs.readdir(SOURCE_ROOTS.sharedReadings))
-    .filter((name) => name.endsWith(".md"))
-    .sort();
-
-  for (const file of sharedFiles) {
-    await copyFile(path.join(SOURCE_ROOTS.sharedReadings, file), path.join(TARGET_ROOTS.readings, file));
-  }
-
-  const lectureDirs = (await fs.readdir(SOURCE_ROOTS.lectures, { withFileTypes: true }))
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .sort();
-
-  for (const lectureSlug of lectureDirs) {
-    const readingRoot = path.join(SOURCE_ROOTS.lectures, lectureSlug, "reading");
-    const readingSource = path.join(readingRoot, "index.md");
-
-    try {
-      await fs.access(readingSource);
-    } catch {
-      continue;
-    }
-
-    const readingTargetName = `${readingDocNameFromLectureSlug(lectureSlug)}.md`;
-    await copyFile(readingSource, path.join(TARGET_ROOTS.readings, readingTargetName));
-
-    const imageSource = path.join(readingRoot, "images");
-    const excalidrawSource = path.join(readingRoot, "excalidraw");
-
-    try {
-      await fs.access(imageSource);
-      await copyDirContents(imageSource, path.join(TARGET_ROOTS.readings, "images"));
-    } catch {}
-
-    try {
-      await fs.access(excalidrawSource);
-      await copyDirContents(excalidrawSource, path.join(TARGET_ROOTS.readings, "excalidraw"));
-    } catch {}
-  }
+  await copyDirContents(SOURCE_ROOTS.readings, TARGET_ROOTS.readings);
 }
 
 async function syncHomework() {

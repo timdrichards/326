@@ -28,7 +28,7 @@ This command syncs course content, regenerates zips/decks, and then builds stati
 
 Generated website content comes from source folders under `../course/`:
 
-- lecture readings: `../course/lectures/*/reading/`
+- class readings/book: `../course/readings/`
 - lecture code: `../course/lectures/*/code/`
 - lecture slides: `../course/lectures/*/slides/`
 - assignments: `../course/assignments/homework/`

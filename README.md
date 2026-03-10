@@ -5,10 +5,11 @@ This repository contains course source materials plus the Docusaurus site used t
 ## Repo layout
 
 - `course/`: source-of-truth authored course material
-  - `course/lectures/`: lecture units with slides, readings, and code
+  - `course/lectures/`: lecture units with slides and code
   - `course/assignments/`: homework specs and starter/solution code
+  - `course/readings/`: the class book / reading chapters and reading assets
   - `course/weeks/`: week overview pages
-  - `course/shared/`: shared readings and templates
+  - `course/shared/`: reusable templates and other shared assets
 - `website/`: Docusaurus publish target
 - `.github/workflows/`: automation, including GitHub Pages deployment
 
@@ -20,7 +21,7 @@ Before each site build, content is synced from `course/` into `website/docs/` an
 `cd website && npm run prepare:content` performs the full preparation pass:
 
 - sync week pages from `course/weeks/`
-- sync lecture readings and shared references from `course/lectures/` and `course/shared/` into `website/docs/readings/`
+- sync the class book from `course/readings/` into `website/docs/readings/`
 - sync homework specs into `website/docs/homework/`
 - zip lecture code from `course/lectures/*/code`
 - zip homework starters from `course/assignments/homework/*/student`

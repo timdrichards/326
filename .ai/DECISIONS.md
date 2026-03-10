@@ -77,10 +77,11 @@ Rationale: relative asset URLs keep deck HTML portable across both GitHub Pages 
 ## 2026-03-10 - Repository Uses Source-First Course Layout
 
 - `course/` is the source of truth for authored course material.
-- `course/lectures/` stores lecture slides, readings, and code.
+- `course/lectures/` stores lecture slides and code.
 - `course/assignments/` stores homework specs and starter/solution code.
+- `course/readings/` stores the authored class book chapters plus reading assets.
 - `course/weeks/` stores course-level week pages.
-- `course/shared/` stores cross-cutting reading/reference material and templates.
+- `course/shared/` stores cross-cutting templates and other shared assets.
 - `website/` is the publish target, not the primary authoring home.
 - Website build scripts must sync docs and static artifacts from those source directories before Docusaurus build/deploy.
 

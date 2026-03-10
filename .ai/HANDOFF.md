@@ -1,5 +1,18 @@
 # Session Handoffs
 
+## Session: 2026-03-10 - Course Readings Consolidated Under course/readings
+
+### Summary
+- Moved the canonical class reading/book sources into `course/readings/`.
+- Relocated lecture reading chapters and reading assets out of lecture folders into the new shared book directory.
+- Moved shared glossary/reference chapters from `course/shared/readings/` into `course/readings/`.
+- Simplified `website/scripts/sync-course-content.mjs` so `website/docs/readings/` is now published directly from `course/readings/`.
+- Updated repo docs to describe `course/readings/` as the canonical source for the class book.
+
+### Verification
+- Ran `cd website && npm run build` successfully.
+- Confirmed `website/docs/readings/` is now republished directly from `course/readings/`.
+
 ## Session: 2026-03-10 - Course Directory Consolidation
 
 ### Summary
