@@ -1,5 +1,16 @@
 # Session Handoffs
 
+## Session: 2026-03-10 - Reading Excalidraw Sources Restored to Native Format
+
+### Summary
+- Converted the reading diagram source files in `course/readings/excalidraw/` from Obsidian-style `.excalidraw.md` wrappers into native `.excalidraw` JSON files.
+- Kept the exported SVGs unchanged for the website-reading pages.
+- Updated `website/docusaurus.config.js` to exclude both `*.excalidraw` and `*.excalidraw.md` from docs processing.
+
+### Verification
+- Confirmed the files in `course/readings/excalidraw/` now use the `.excalidraw` extension and contain native Excalidraw JSON.
+- Ran `cd website && npm run build` successfully.
+
 ## Session: 2026-03-10 - Course Readings Consolidated Under course/readings
 
 ### Summary
