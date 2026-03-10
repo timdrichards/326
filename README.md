@@ -54,6 +54,22 @@ The build pipeline generates published artifacts in `website/static/`:
 
 Archive generation excludes runtime/local artifacts such as `node_modules`, `dist`, `build`, `.env`, `*.db`, and Prisma migrations.
 
+## Markdown linking
+
+When writing markdown in `course/`, write links against the published website structure, not the raw `course/` filesystem.
+
+- Use relative links only when the relative relationship will stay the same after sync into `website/docs/`.
+- Use published docs paths such as `/docs/readings/10-orm` or `/docs/homework/02/02`.
+- Use published static paths such as `/decks/10-orm/` or `/code/hw-02.zip`.
+- Do not link to `course/...` paths from markdown meant for the website.
+
+Examples:
+
+- good: `/docs/readings/10-orm`
+- good: `./11-identity.md`
+- good: `/decks/11-identity/`
+- bad: `../../course/readings/10-orm.md`
+
 ## Deployment
 
 This repo deploys the Docusaurus site to GitHub Pages via GitHub Actions.

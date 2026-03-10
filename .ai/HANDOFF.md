@@ -1,5 +1,15 @@
 # Session Handoffs
 
+## Session: 2026-03-10 - Added Markdown Linking Guidance
+
+### Summary
+- Added a short markdown-linking guide to `README.md` and `course/README.md`.
+- Documented the rule that authored markdown in `course/` should link against the published Docusaurus structure, not raw `course/...` source paths.
+- Included examples for docs links, deck links, code zip links, and a bad `course/...` link example.
+
+### Verification
+- Documentation-only change; no build run.
+
 ## Session: 2026-03-10 - Reading Excalidraw Sources Restored to Native Format
 
 ### Summary
