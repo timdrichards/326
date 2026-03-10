@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "publish": "./scripts/publish-website.sh",
-    "publish:website": "./scripts/publish-website.sh"
+    "publish:website": "./scripts/publish-website.sh",
+    "watch:site": "npm --prefix website run watch:site --"
   }
 }

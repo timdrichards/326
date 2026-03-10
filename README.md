@@ -1,12 +1,29 @@
 # 326 Repository
 
-This repository contains course materials and a Docusaurus site used to publish course documentation to GitHub Pages.
+This repository contains course source materials plus the Docusaurus site used to publish them to GitHub Pages.
 
 ## Repo layout
 
-- `lectures/`: lecture content, demos, and related assets
-- `website/`: Docusaurus site (docs, theme, config)
+- `lectures/`: source-of-truth lecture units
+- `assignments/`: source-of-truth homework materials
+- `course/`: course-level authored docs such as week pages
+- `shared/`: shared readings and templates
+- `website/`: Docusaurus publish target
 - `.github/workflows/`: automation, including GitHub Pages deployment
+
+## Build flow
+
+The website is now a generated destination rather than the main authoring home.
+Before each site build, content is synced from the source directories above into `website/docs/` and `website/static/`.
+
+`cd website && npm run prepare:content` performs the full preparation pass:
+
+- sync week pages from `course/weeks/`
+- sync lecture readings and shared references into `website/docs/readings/`
+- sync homework specs into `website/docs/homework/`
+- zip lecture code from `lectures/*/code`
+- zip homework starters from `assignments/homework/*/student`
+- build Slidev decks from `lectures/*/slides`
 
 ## Run the site locally
 
@@ -25,18 +42,15 @@ cd website
 npm run build
 ```
 
-## Homework zip automation
+## Content generation
 
-The website now auto-generates downloadable homework starter archives from `website/docs/homework/<nn>/student` into `website/static/code/hw-<nn>.zip`.
+The build pipeline generates published artifacts in `website/static/`:
 
-- Manual run: `cd website && npm run zip:homework`
-- Watch mode: `cd website && npm run zip:homework:watch`
-- Integrated runs:
-  - `npm start` runs zip watch alongside Docusaurus dev server.
-  - `npm run build` runs zip generation before Docusaurus build.
-  - `npm run deploy` and `npm run publish:site` run zip generation before deploy.
+- lecture code archives like `website/static/code/09-persistence.zip`
+- homework starter archives like `website/static/code/hw-02.zip`
+- published Slidev decks under `website/static/decks/`
 
-Archive generation excludes runtime/local artifacts: `node_modules`, `dist`, `build`, `.env`, and `*.db`.
+Archive generation excludes runtime/local artifacts such as `node_modules`, `dist`, `build`, `.env`, `*.db`, and Prisma migrations.
 
 ## Deployment
 
@@ -55,4 +69,4 @@ From the repo root, run:
 npm run publish
 ```
 
-This command runs the full publish workflow: website build (including homework zip generation), `git add`, commit, push to `main`, and optional tag creation/push.
+This command runs the full publish workflow: prepare website content, build the site, `git add`, commit, push to `main`, and optionally create a publish tag.

@@ -1,5 +1,53 @@
 # Session Handoffs
 
+## Session: 2026-03-10 - Source-First Repository Reorganization
+
+### Summary
+- Reorganized the repository around source-of-truth teaching units:
+  - moved lecture materials into `lectures/`
+  - moved homework materials into `assignments/homework/`
+  - moved week pages into `course/weeks/`
+  - moved shared readings/templates into `shared/`
+- Archived the old top-level reading source tree under `archive/legacy-reading-source/`.
+- Added content-prep scripts under `website/scripts/` to:
+  - sync readings, weeks, and homework docs into `website/docs/`
+  - zip lecture code into `website/static/code/`
+  - zip homework starters from `assignments/homework/*/student`
+  - publish all lecture decks from `lectures/*/slides` into `website/static/decks/`
+- Updated `website/package.json` so `start`, `build`, `deploy`, and `publish:site` all run the new preparation pipeline first.
+- Updated repo documentation to explain the new source-first layout.
+
+### Verification
+- Ran `cd website && npm run prepare:content` successfully.
+- Ran `cd website && npm run build` successfully.
+- Confirmed `website/docs/` and `website/static/` are now regenerated from the new source directories.
+
+## Session: 2026-03-10 - Site Watcher Change-Only Output
+
+### Summary
+- Updated `website/scripts/watch-site-status.mjs` so default behavior prints only a single colorized line when the observed site state changes.
+- Added color-coded states:
+  - green for deployed/live
+  - yellow for partial/pending states
+  - blue for branch-present but live-site-not-ready states
+  - red for request or branch-check failures
+- Kept `--verbose` as an opt-in mode for per-check debug logging.
+
+### Verification
+- Ran `npm run watch:site -- --once` from the repo root and confirmed it emitted one yellow line only.
+- Ran `npm run watch:site -- --once --verbose` and confirmed verbose polling logs still work.
+
+## Session: 2026-03-10 - GitHub Pages Site Watcher
+
+### Summary
+- Added `website/scripts/watch-site-status.mjs` to poll the live site URL and the `gh-pages` branch on a fixed interval.
+- Added `npm run watch:site` in `website/package.json`.
+- The watcher logs every check, reports whether `gh-pages` exists yet, prints HTTP status/ETag/Last-Modified for the live site, and detects likely new deployed builds via HTML hash and asset fingerprint changes.
+
+### Verification
+- Ran `cd website && npm run watch:site -- --once`.
+- Confirmed it logged a successful live-site check for `https://timdrichards.github.io/326/` and correctly reported that `gh-pages` does not exist yet.
+
 ## Session: 2026-03-10 - Slidev Deck Publish Path Fix
 
 ### Summary

@@ -6,7 +6,8 @@ import path from "node:path";
 import os from "node:os";
 
 const ROOT = process.cwd();
-const HOMEWORK_ROOT = path.join(ROOT, "docs", "homework");
+const REPO_ROOT = path.resolve(ROOT, "..");
+const HOMEWORK_ROOT = path.join(REPO_ROOT, "assignments", "homework");
 const OUTPUT_ROOT = path.join(ROOT, "static", "code");
 
 const EXCLUDED_DIRS = new Set(["node_modules", "dist", "build"]);
@@ -172,7 +173,7 @@ async function startWatchMode() {
   });
 
   await zipAllHomework();
-  console.log("[zip-homework] watching docs/homework for changes...");
+  console.log("[zip-homework] watching assignments/homework for changes...");
 }
 
 const isWatchMode = process.argv.includes("--watch");
