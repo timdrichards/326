@@ -65,3 +65,11 @@ Rationale: simplify student workflow and keep grading focused on code + writeup 
 - Zip generation is integrated into `website` scripts for `start`, `build`, and deploy/publish flows.
 
 Rationale: ensures downloadable starter archives stay synchronized with assignment folders and avoids shipping machine-specific or bulky artifacts.
+
+## 2026-03-10 - Published Slidev Decks Should Use Relative Asset Base
+
+- Publish Slidev decks into `website/static/decks/<slug>/` using `slidev build --base ./`.
+- Treat `./` as the default base for `scripts/publish-slidev-deck.sh`.
+- Use an explicit `--site-base` override only when a deployment target truly requires absolute deck URLs.
+
+Rationale: relative asset URLs keep deck HTML portable across both GitHub Pages subpath hosting and root-hosted deployments, preventing white-screen failures from broken `/assets/...` or hardcoded `/<repo>/...` paths.

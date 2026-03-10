@@ -6,17 +6,17 @@
 <title>ORM and Prisma - Slidev</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;600&family=Fira+Code:wght@200;400;600&display=swap" type="text/css">
 <link rel="preload" as="image" href="https://cover.sli.dev">
-<link rel="preload" as="image" href="/326/decks/10-orm/./images/6.10-prisma-request-flow.svg">
-<link rel="icon" href="/326/decks/10-orm/favicon.svg">
+<link rel="preload" as="image" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjUyMCIgdmlld0JveD0iMCAwIDEyODAgNTIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiAgPHRpdGxlIGlkPSJ0aXRsZSI+UHJpc21hIFJlcXVlc3QgRmxvdzwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPlJlcXVlc3QgcGF0aCBmcm9tIEhUVFAgcm91dGUgdG8gdmFsaWRhdGlvbiB0byBQcmlzbWEgdG8gU1FMaXRlIGFuZCBiYWNrLjwvZGVzYz4KICA8cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI1MjAiIGZpbGw9IiNmZmZmZmYiLz4KICA8dGV4dCB4PSI2NDAiIHk9IjYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzYiIGZpbGw9IiMxZTFlMWUiPlByaXNtYSBSZXF1ZXN0IEZsb3c8L3RleHQ+CgogIDxyZWN0IHg9IjEyMCIgeT0iMTgwIiB3aWR0aD0iMjIwIiBoZWlnaHQ9IjExMCIgcng9IjE0IiBmaWxsPSIjZDBlYmZmIiBzdHJva2U9IiMxOTcxYzIiIHN0cm9rZS13aWR0aD0iMyIvPgogIDx0ZXh0IHg9IjIzMCIgeT0iMjQ2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzIiIGZpbGw9IiMxZTFlMWUiPkhUVFAgUmVxPC90ZXh0PgoKICA8cmVjdCB4PSIzOTAiIHk9IjE4MCIgd2lkdGg9IjI0MCIgaGVpZ2h0PSIxMTAiIHJ4PSIxNCIgZmlsbD0iI2QzZjlkOCIgc3Ryb2tlPSIjMmY5ZTQ0IiBzdHJva2Utd2lkdGg9IjMiLz4KICA8dGV4dCB4PSI1MTAiIHk9IjI0NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjMyIiBmaWxsPSIjMWUxZTFlIj5WYWxpZGF0ZTwvdGV4dD4KCiAgPHJlY3QgeD0iNjgwIiB5PSIxODAiIHdpZHRoPSIyNjAiIGhlaWdodD0iMTEwIiByeD0iMTQiIGZpbGw9IiNmZmU4Y2MiIHN0cm9rZT0iI2U2NzcwMCIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgPHRleHQgeD0iODEwIiB5PSIyNDYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMiIgZmlsbD0iIzFlMWUxZSI+UHJpc21hPC90ZXh0PgoKICA8cmVjdCB4PSI5OTAiIHk9IjE4MCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxMTAiIHJ4PSIxNCIgZmlsbD0iI2ZmZGVlYiIgc3Ryb2tlPSIjYzIyNTVjIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8dGV4dCB4PSIxMDgwIiB5PSIyNDYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMiIgZmlsbD0iIzFlMWUxZSI+U1FMaXRlPC90ZXh0PgoKICA8ZGVmcz4KICAgIDxtYXJrZXIgaWQ9ImFycm93IiBtYXJrZXJXaWR0aD0iMTAiIG1hcmtlckhlaWdodD0iMTAiIHJlZlg9IjgiIHJlZlk9IjMiIG9yaWVudD0iYXV0byIgbWFya2VyVW5pdHM9InN0cm9rZVdpZHRoIj4KICAgICAgPHBhdGggZD0iTTAsMCBMMCw2IEw5LDMgeiIgZmlsbD0iIzQ5NTA1NyIvPgogICAgPC9tYXJrZXI+CiAgPC9kZWZzPgoKICA8bGluZSB4MT0iMzQwIiB5MT0iMjM1IiB4Mj0iMzkwIiB5Mj0iMjM1IiBzdHJva2U9IiM0OTUwNTciIHN0cm9rZS13aWR0aD0iMyIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KICA8bGluZSB4MT0iNjMwIiB5MT0iMjM1IiB4Mj0iNjgwIiB5Mj0iMjM1IiBzdHJva2U9IiM0OTUwNTciIHN0cm9rZS13aWR0aD0iMyIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KICA8bGluZSB4MT0iOTQwIiB5MT0iMjM1IiB4Mj0iOTkwIiB5Mj0iMjM1IiBzdHJva2U9IiM0OTUwNTciIHN0cm9rZS13aWR0aD0iMyIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KCiAgPGxpbmUgeDE9IjEwODAiIHkxPSIzNDAiIHgyPSIyNDAiIHkyPSIzNDAiIHN0cm9rZT0iIzFlMWUxZSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtZGFzaGFycmF5PSIxMCw4IiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPgogIDx0ZXh0IHg9IjY2MCIgeT0iMzgyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjgiIGZpbGw9IiMxZTFlMWUiPlJlc3BvbnNlIHdpdGggbm9ybWFsaXplZCBvdXRwdXQ8L3RleHQ+Cjwvc3ZnPgo=">
+<link rel="icon" href="./favicon.svg">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta property="slidev:version" content="52.14.0">
 <meta name="description" content="&quot;COMPSCI 326 Web Programming\nLecture 6.10: ORM and Prisma\n&quot;">
 <meta property="og:title" content="ORM and Prisma - Slidev">
-<meta property="og:description" content="&quot;COMPSCI 326 Web Programming\nLecture 6.10: ORM and Prisma\n&quot;">  <script type="module" crossorigin src="/326/decks/10-orm/assets/index-DuO8Gyz3.js"></script>
-  <link rel="modulepreload" crossorigin href="/326/decks/10-orm/assets/modules/vue-C7FbggYh.js">
-  <link rel="modulepreload" crossorigin href="/326/decks/10-orm/assets/modules/shiki-CijVq0qe.js">
-  <link rel="stylesheet" crossorigin href="/326/decks/10-orm/assets/modules/shiki-UqVAgQbi.css">
-  <link rel="stylesheet" crossorigin href="/326/decks/10-orm/assets/index--flHhF6R.css">
+<meta property="og:description" content="&quot;COMPSCI 326 Web Programming\nLecture 6.10: ORM and Prisma\n&quot;">  <script type="module" crossorigin src="./assets/index-B0-gzKKY.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/modules/vue-C7FbggYh.js">
+  <link rel="modulepreload" crossorigin href="./assets/modules/shiki-CijVq0qe.js">
+  <link rel="stylesheet" crossorigin href="./assets/modules/shiki-UqVAgQbi.css">
+  <link rel="stylesheet" crossorigin href="./assets/index--flHhF6R.css">
 </head>
 <body>
   <div id="app"></div>

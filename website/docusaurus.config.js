@@ -10,7 +10,7 @@ import { themes as prismThemes } from 'prism-react-renderer'
 
 const repository = process.env.GITHUB_REPOSITORY ?? ''
 const [repoOwnerFromEnv, repoNameFromEnv] = repository.split('/')
-const organizationName = repoOwnerFromEnv || 'YOUR_GITHUB_USERNAME'
+const organizationName = repoOwnerFromEnv || 'timdrichards'
 const projectName = repoNameFromEnv || '326'
 const githubPagesUrl = `https://${organizationName}.github.io`
 const baseUrl = process.env.DOCUSAURUS_BASE_URL ?? `/${projectName}/`

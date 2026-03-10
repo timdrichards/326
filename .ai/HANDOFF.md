@@ -1,5 +1,27 @@
 # Session Handoffs
 
+## Session: 2026-03-10 - Slidev Deck Publish Path Fix
+
+### Summary
+- Diagnosed published Slidev deck white-screen failures as a bad asset base path in generated deck HTML.
+- Updated `scripts/publish-slidev-deck.sh` so deck publishing now defaults to `slidev build --base ./` instead of assuming a repository-prefixed absolute base.
+- Republished `09-persistence`, `10-orm`, and `11-identity` into `website/static/decks/` with relative `./assets/...` URLs.
+- Rebuilt the Docusaurus site so `website/build` includes the corrected deck files.
+
+### Verification
+- Confirmed generated deck HTML in `website/static/decks/*/index.html` and `website/build/decks/11-identity/index.html` now references `./assets/...` rather than root-relative or repo-hardcoded asset paths.
+- Ran `cd website && npm run build` successfully.
+
+## Session: 2026-03-10 - Lecture Reading Skill Stub Replacement
+
+### Summary
+- Replaced the placeholder content in `/Users/richards/.codex/skills/generate-lecture-reading/SKILL.md` with a concrete workflow-based skill definition.
+- Added explicit trigger conditions, required inputs, repository-specific reading conventions, writing guidance, expected outputs, verification steps, and example requests.
+- Aligned the skill with local course material structure, especially `website/docs/readings/` chapters and `website/docs/weeks/` reading links.
+
+### Verification
+- Re-read the skill file to confirm all template TODO sections were removed and the instructions now describe an actionable workflow.
+
 ## Session: 2026-03-09 - Identity Slide Deck Generation
 
 ### Summary

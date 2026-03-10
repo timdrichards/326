@@ -14,22 +14,23 @@ Arguments:
   deck_slug                Optional URL/output slug. Defaults to basename(deck_dir).
 
 Options:
-  --site-base <path>       Docusaurus base URL prefix (default: /<repo-name>/).
-                           Example: --site-base /326/
+  --site-base <path>       Explicit Slidev base path override.
+                           Defaults to ./ for portable deck assets.
+                           Example: --site-base /326/decks/09-persistence/
   --install                Run npm install in the deck directory before build.
   --dry-run                Print actions without building/copying.
   -h, --help               Show this help.
 
 Examples:
   scripts/publish-slidev-deck.sh slides/09-persistence
-  scripts/publish-slidev-deck.sh --site-base /326/ slides/09-persistence week-09
+  scripts/publish-slidev-deck.sh --site-base /326/decks/09-persistence/ slides/09-persistence week-09
 EOF
 }
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
-SITE_BASE=""
+SITE_BASE="./"
 DO_INSTALL=0
 DRY_RUN=0
 
@@ -69,14 +70,13 @@ fi
 DECK_DIR_INPUT="$1"
 DECK_SLUG="${2:-}"
 
-if [[ -z "${SITE_BASE}" ]]; then
-  SITE_BASE="/$(basename "${REPO_ROOT}")/"
-fi
-
-# Normalize site base to leading+trailing slash
-SITE_BASE="/${SITE_BASE#/}"
-if [[ "${SITE_BASE}" != */ ]]; then
-  SITE_BASE="${SITE_BASE}/"
+# Normalize non-relative site base to leading+trailing slash.
+# Default `./` keeps built deck assets portable across root-hosted and subpath-hosted sites.
+if [[ "${SITE_BASE}" != "./" ]]; then
+  SITE_BASE="/${SITE_BASE#/}"
+  if [[ "${SITE_BASE}" != */ ]]; then
+    SITE_BASE="${SITE_BASE}/"
+  fi
 fi
 
 if [[ "${DECK_DIR_INPUT}" = /* ]]; then
@@ -104,7 +104,11 @@ if [[ -z "${DECK_SLUG}" ]]; then
   DECK_SLUG="$(basename "${DECK_DIR}")"
 fi
 
-DECK_BASE_PATH="${SITE_BASE}decks/${DECK_SLUG}/"
+if [[ "${SITE_BASE}" = "./" ]]; then
+  DECK_BASE_PATH="./"
+else
+  DECK_BASE_PATH="${SITE_BASE}"
+fi
 DECK_DIST_DIR="${DECK_DIR}/dist"
 TARGET_DIR="${REPO_ROOT}/website/static/decks/${DECK_SLUG}"
 
