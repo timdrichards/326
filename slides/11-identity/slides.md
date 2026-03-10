@@ -106,15 +106,19 @@ class: text-2xl
 - A successful login would be useless if the next request forgot it immediately.
 
 ---
-layout: two-cols
-class: text-2xl cols-60-40
+layout: two-cols-header
+class: text-2xl cols-50-50
 ---
 
 ## What HTTP Does Not Give Us
 
+::left::
+
 - HTTP is stateless by default.
 - Each request arrives as a separate event.
 - Server process memory alone is not enough for browser-specific continuity.
+
+<br>
 
 <div class="callout callout-warn">
 If two requests look identical, HTTP itself does not tell the server whether they came from the same browser.
@@ -141,8 +145,6 @@ class: text-xl cols-75-25
 The browser stores a small token. The server stores the session data. The token links them.
 </div>
 
-![alt text](/images/stateless-vs-sessions.png)
-
 ::right::
 
 <ul class="ul-frame">
@@ -156,31 +158,21 @@ The browser stores a small token. The server stores the session data. The token 
 class: text-xl
 ---
 
+## Stateless vs Session-Based Request Flow
 
-<p>
-The browser stores a small token. The server stores the session data. The token links them.
-<ul>
-  <li>Browser can store a cookie.</li>
-  <li>Cookie should carry an opaque session id.</li>
-  <li>Server uses that id to look up session state.</li>
-  <li>Continuity fails when those pieces do not match.</li>
-</ul>
-</p>
-
-<img src="/images/stateless-vs-sessions.png" style="width: 100%; max-width: none;" />
-
+![alt text](/images/stateless-vs-sessions.png)
 
 
 ---
 layout: two-cols-header
-class: text-xl exercise-compact cols-67-33
+layoutClass: title-tight cols-60-40
 ---
 
 ## In-Class Activity 1: Continuity Channel Puzzle
 
 ::left::
 
-Everyone solves the same problem on paper with a partner.
+Consider the following browser/server interaction over HTTP:
 
 ```text
 Shared sequence
@@ -188,31 +180,40 @@ Shared sequence
 1. Browser -> POST /login with credentials
 2. Server verifies credentials
 3. Server creates session record:
-   key = "sess_7F3A"
-   value = { userId: 42, role: "student" }
-4. Server response sends:
+       key = "sess_7F3A"
+       value = { userId: 42, role: "student" }
+4. Server response includes the following header:
    Set-Cookie: sid = __________
 5. Browser stores that cookie
 6. Later browser request sends:
    Cookie: userId = 42          <-- one step is wrong
-7. Server tries to look up:
+7. Server tries to look up the session id:
    sessionStore[ __________ ]
-8. If lookup succeeds, server knows this is the same browser
+8. If lookup succeeds, server knows this is 
+   the same browser
 ```
 
-Write down:
+::right::
+
+<CountdownTimer
+  label="Activity 1"
+  :minutes="8"
+  :auto-start="true"
+  :warn-at="30"
+/>
+
+<div class="text-sm">
+
+**Write down:**
 - the correct cookie value in step 4
 - the correct lookup key in step 7
 - the exact step number that is broken
 - one sentence explaining why it breaks continuity
 
-::right::
-
-<div class="sticky-note">
-Facts you may use
 </div>
 
-<ul class="ul-frame">
+**Facts you may use:**
+<ul class="ul-frame text-sm">
   <li>HTTP is stateless unless the app creates a continuity channel.</li>
   <li>The browser sends the cookie back on later requests.</li>
   <li>The cookie should hold the session id, not the full user state.</li>
@@ -225,20 +226,31 @@ class: text-2xl
 
 ## Discussion Point
 
-“We can keep continuity data in the browser, on the server, or split between both. How do we create a continuous browser-server channel so each new request can tell one browser apart from another?”
+<CourseCallout title="Key Idea">
+We can keep continuity data in the browser, on the server, or split between both. How do we create a continuous browser-server channel so each new request can tell one browser apart from another?
+</CourseCallout>
 
-Discuss in small groups:
+<CountdownTimer
+  label="Activity 1"
+  :minutes="5"
+  :auto-start="true"
+  :warn-at="30"
+/>
+
+**Discuss in small groups:**
 
 - What should the browser send each request?
 - What should the server store?
 - What tradeoffs come from that split?
 
 ---
-layout: two-cols
-class: text-2xl cols-60-40
+layout: two-cols-header
+class: text-xl cols-60-40
 ---
 
 ## Identity, Credentials, and Session
+
+::left::
 
 - **Identity:** who the system believes this is
 - **Credentials:** proof presented by the client
@@ -251,23 +263,31 @@ Today is about session establishment and use, not full authentication policy.
 ::right::
 
 ```text
-credentials  ->  verification  ->  session
+[ Credentials ] ---> [ Verification ] ---> [ Session ]
+   password             compare hash         store session state
+   login code           check user record    send session cookie
 
-"Prove it"      "Check it"        "Remember it"
+   "Who are you?"       "Is that true?"      "Stay signed in"
 ```
 
 ---
-class: text-xl
+class: text-2xl
 ---
 
 ## Core Session Lifecycle
 
-```mermaid
-flowchart LR
-  A["1. Establish session"] --> B["2. Attach session id to client"]
-  B --> C["3. Read or update session per request"]
-  C --> D["4. Expire or invalidate session"]
+```text
+Browser                          Server
+-------                          -----------------------------
+credentials   ------------->     verification
+(password, token)                check database / hash / rules
+
+session cookie <-------------    create session
+later requests ------------->    look up session and restore identity
+
 ```
+
+<br>
 
 - Establish after a successful identity check
 - Attach the session id to the client, usually with a cookie
@@ -275,8 +295,7 @@ flowchart LR
 - End the session explicitly or by expiration
 
 ---
-layout: two-cols
-class: text-xl cols-60-40
+class: text-2xl framed-lists
 ---
 
 ## Session ID and Cookie Basics
@@ -292,21 +311,22 @@ GET /dashboard HTTP/1.1
 Cookie: sid=sess_7F3A
 ```
 
-::right::
+<br>
 
-<ul class="ul-frame">
-  <li><code>sid</code> is an opaque token, not user data.</li>
-  <li><code>HttpOnly</code> helps block JavaScript access.</li>
-  <li><code>Secure</code> means send only over HTTPS.</li>
-  <li><code>SameSite</code> helps reduce cross-site request risk.</li>
-</ul>
+- `sid` is an opaque token, not user data.
+- `HttpOnly` helps block JavaScript access.
+- `Secure` means send only over HTTPS.
+- `SameSite` helps reduce cross-site request risk.
 
 ---
-layout: two-cols
-class: text-xl cols-60-40
+layout: two-cols-header
+class: text-xl cols-50-50
+layoutClass: title-tight framed-lists
 ---
 
 ## Express Session Conceptual Setup
+
+::left::
 
 ```ts
 import express from "express";
@@ -328,35 +348,15 @@ app.use(session({
 
 ::right::
 
-<template v-if="$clicks === 0">
-  <ul class="ul-frame">
-    <li>Session support is middleware in Express.</li>
-    <li>Middleware must run before routes that use <code>req.session</code>.</li>
-    <li>The middleware manages cookie parsing and session lookup.</li>
-  </ul>
-</template>
+<ul class="ul-frame">
+  <li>This middleware turns on session support for the app.</li>
+  <li>The server uses a secret value to protect the session cookie from tampering.</li>
+  <li>It avoids saving sessions when nothing changed or when no real session data exists yet.</li>
+  <li>The cookie is marked <code>httpOnly</code> so browser JavaScript cannot read it.</li>
+  <li><code>sameSite: "lax"</code> helps reduce cross-site request abuse.</li>
+  <li><code>secure: false</code> is acceptable for local development, but production should use HTTPS-only cookies.</li>
+</ul>
 
-<template v-else-if="$clicks === 1">
-  <div class="callout">
-    <code>secret</code> signs the session cookie so the client cannot freely forge it.
-  </div>
-</template>
-
-<template v-else-if="$clicks === 2">
-  <div class="callout callout-warn">
-    <code>secure: false</code> is only for local development over plain HTTP.
-  </div>
-</template>
-
-<template v-else>
-  <div class="callout">
-    After this middleware runs, route handlers can read and write session state through <code>req.session</code>.
-  </div>
-</template>
-
-<v-click />
-<v-click />
-<v-click />
 
 ---
 class: text-xl
@@ -364,7 +364,7 @@ class: text-xl
 
 ## Express Session Minimal Example
 
-```ts {1-7|9-13|15-19|all}
+```ts {1-7|9-13|14-19|all}
 app.get("/login-demo", (req, res) => {
   req.session.user = {
     id: 42,
@@ -419,10 +419,12 @@ If the store disappears on restart, the session disappears too.
 ::right::
 
 ```text
-One server + memory store
+[ One Server + Memory Store ]
+------------------------------
   restart => sessions lost
 
-Two servers + separate memory stores
+[ Two Servers + Separate Memory Stores ]
+-----------------------------------------
   request may hit server A or server B
   same cookie, different session memory
 ```
@@ -434,9 +436,9 @@ class: text-2xl cols-60-40
 
 ## Session Correctness and Security Fundamentals
 
-- Regenerate sessions on sensitive transitions such as login.
-- Do not store raw credentials in the session.
-- Use expiration and explicit logout.
+1. **Regenerate sessions** on sensitive transitions such as login.
+2. **Do not store** raw credentials in the session.
+3. **Use expiration** and **explicit logout**.
 
 <div class="callout">
 Before the next activity, keep three cause-and-effect rules in mind.
@@ -445,14 +447,15 @@ Before the next activity, keep three cause-and-effect rules in mind.
 ::right::
 
 <ul class="ul-frame">
-  <li>Restart failure usually means volatile in-memory storage.</li>
-  <li>Different server behavior usually means no shared session store.</li>
-  <li>Sensitive data in session is a bad minimization and security choice.</li>
+  <li>Logged out after restart: session was only in memory.</li>
+  <li>Works on one server only: servers are not sharing session storage.</li>
+  <li>Password in session: storing sensitive data you should not keep.</li>
 </ul>
 
 ---
 layout: two-cols-header
 class: text-xl exercise-compact cols-67-33
+layoutClass: title-ultra-tight
 ---
 
 ## In-Class Activity 2: Session Failure Detective
@@ -462,20 +465,26 @@ class: text-xl exercise-compact cols-67-33
 Everyone solves the same scenario on paper in small groups.
 
 ```text
-Broken system description
-
+BROKEN SYSTEM DESCRIPTION
 - A user logs in successfully.
 - After the server restarts, the user is logged out.
 - On a two-server deployment, server A recognizes the session
   but server B does not.
 - The session object stores the user's raw password.
+
+EXAMPLE:
+Problem: Users stay logged in forever.
+Design flaw: The session never expires.
+Fix: Add an expiration time so old sessions are 
+     removed automatically.
+
 ```
 
-Write down:
+Write down for each problem:
 
-1. the design flaw behind each failure
-2. a one-sentence fix for each flaw
-3. which flaw is the most dangerous, and why
+1. What is wrong in the design
+2. One sentence explaining how to fix it
+3. Which problem is the most dangerous, and why
 
 ::right::
 
@@ -488,6 +497,37 @@ Facts you may use
   <li>Multi-instance apps need a shared session store.</li>
   <li>Sessions should store minimal necessary state, not raw credentials.</li>
 </ul>
+
+<CountdownTimer
+  label="Activity 1"
+  :minutes="8"
+  :auto-start="true"
+  :warn-at="30"
+/>
+
+<!--
+Solution:
+
+Broken system description:
+
+- "A user logs in successfully."
+  This tells us the initial login and session creation path works.
+
+- "After the server restarts, the user is logged out."
+  Cause: session data is stored only in server memory, so restart wipes it out.
+  Fix: move session storage to a durable store such as Redis or a database-backed session store.
+
+- "On a two-server deployment, server A recognizes the session but server B does not."
+  Cause: each server has its own separate session store, so they do not see the same session record.
+  Fix: use one shared session store that all app instances read and write.
+
+- "The session object stores the user's raw password."
+  Cause: the session contains highly sensitive data that should never be kept there.
+  Fix: store only minimal session state such as user id and role, never raw credentials.
+
+Most dangerous flaw:
+The raw password in the session is the most dangerous because it increases the harm of session leakage or server compromise and violates data minimization.
+-->
 
 ---
 class: text-2xl
@@ -505,15 +545,17 @@ The point is not memorizing one library. The point is recognizing the design pat
 </div>
 
 ---
-layout: two-cols
-class: text-2xl cols-60-40
+layout: two-cols-header
+class: text-2xl cols-50-50
 ---
 
 ## How This Prepares Next Lecture
 
-- Today: establish continuity after verification.
-- Next lecture: prove identity and enforce access control.
-- Authentication and authorization depend on correct session handling.
+::left::
+
+- **Today:** establish continuity after verification.
+- **Next lecture:** prove identity and enforce access control.
+- *Authentication* and *authorization* depend on correct session handling.
 
 <div class="callout">
 If session state is wrong, later authorization decisions are wrong too.
@@ -546,7 +588,6 @@ class: text-2xl
 
 - Review today’s request flow and two activity solutions.
 - Be ready to distinguish identity, credentials, and session.
-- Bring one question about session risks to the next class.
 
 <CourseCallout title="Main Takeaway">
 Sessions are an application-layer design for continuity across stateless HTTP requests.

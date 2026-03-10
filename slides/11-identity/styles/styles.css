@@ -12,6 +12,26 @@ pre.shiki,
   margin-bottom: 0.7rem;
 }
 
+/* Let grid columns actually shrink when they contain wide code/content */
+.slidev-layout.two-columns .col-left,
+.slidev-layout.two-columns .col-right,
+.slidev-layout.two-cols .col-left,
+.slidev-layout.two-cols .col-right,
+.slidev-layout.two-cols-header .col-left,
+.slidev-layout.two-cols-header .col-right {
+  min-width: 0;
+}
+
+.slidev-layout.two-columns pre.shiki,
+.slidev-layout.two-columns .slidev-code,
+.slidev-layout.two-cols pre.shiki,
+.slidev-layout.two-cols .slidev-code,
+.slidev-layout.two-cols-header pre.shiki,
+.slidev-layout.two-cols-header .slidev-code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 .monaco-editor .view-lines {
   font-size: 18px !important;
   line-height: 1.25 !important;
@@ -170,6 +190,16 @@ ul.ul-frame {
   padding-bottom: 0.08rem !important;
 }
 
+/* Extra-tight header spacing for activity slides with dense bodies */
+.slidev-layout.title-ultra-tight.two-cols-header {
+  row-gap: 0 !important;
+}
+
+.slidev-layout.title-ultra-tight.two-cols-header .col-header {
+  padding-bottom: 0 !important;
+  margin-bottom: -0.42rem !important;
+}
+
 /* Compact top spacing for dense exercise slide while retaining small title gap */
 .slidev-layout.exercise-compact {
   padding-top: 0.95rem !important;
@@ -178,6 +208,16 @@ ul.ul-frame {
 .slidev-layout.exercise-compact .col-header h2,
 .slidev-layout.exercise-compact .col-header h1 {
   margin-bottom: 0.3rem !important;
+}
+
+.slidev-layout.title-ultra-tight.exercise-compact .col-header h2,
+.slidev-layout.title-ultra-tight.exercise-compact .col-header h1 {
+  margin-bottom: -0.22rem !important;
+}
+
+.slidev-layout.title-ultra-tight.two-cols-header .col-left > :first-child,
+.slidev-layout.title-ultra-tight.two-cols-header .col-right > :first-child {
+  margin-top: 0 !important;
 }
 
 .sentence-emphasis {
@@ -222,6 +262,28 @@ ul.ul-frame {
   grid-template-columns: 1.5fr 1fr !important;
 }
 
+.slidev-layout.two-columns.cols-55-45,
+.slidev-layout.two-cols.cols-55-45 {
+  grid-template-columns: 1.222fr 1fr !important;
+}
+.slidev-layout.two-cols-header.cols-55-45 {
+  grid-template-columns: 1.222fr 1fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-55-45) {
+  grid-template-columns: 1.222fr 1fr !important;
+}
+
+.slidev-layout.two-columns.cols-50-50,
+.slidev-layout.two-cols.cols-50-50 {
+  grid-template-columns: 1fr 1fr !important;
+}
+.slidev-layout.two-cols-header.cols-50-50 {
+  grid-template-columns: 1fr 1fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-50-50) {
+  grid-template-columns: 1fr 1fr !important;
+}
+
 .slidev-layout.two-columns.cols-67-33,
 .slidev-layout.two-cols.cols-67-33 {
   grid-template-columns: 2fr 1fr !important;
@@ -244,6 +306,17 @@ ul.ul-frame {
   grid-template-columns: 2.333fr 1fr !important;
 }
 
+.slidev-layout.two-columns.cols-65-35,
+.slidev-layout.two-cols.cols-65-35 {
+  grid-template-columns: 1.857fr 1fr !important;
+}
+.slidev-layout.two-cols-header.cols-65-35 {
+  grid-template-columns: 1.857fr 1fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-65-35) {
+  grid-template-columns: 1.857fr 1fr !important;
+}
+
 .slidev-layout.two-columns.cols-75-25,
 .slidev-layout.two-cols.cols-75-25 {
   grid-template-columns: 3fr 1fr !important;
@@ -255,6 +328,28 @@ ul.ul-frame {
   grid-template-columns: 3fr 1fr !important;
 }
 
+.slidev-layout.two-columns.cols-80-20,
+.slidev-layout.two-cols.cols-80-20 {
+  grid-template-columns: 4fr 1fr !important;
+}
+.slidev-layout.two-cols-header.cols-80-20 {
+  grid-template-columns: 4fr 1fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-80-20) {
+  grid-template-columns: 4fr 1fr !important;
+}
+
+.slidev-layout.two-columns.cols-45-55,
+.slidev-layout.two-cols.cols-45-55 {
+  grid-template-columns: 1fr 1.222fr !important;
+}
+.slidev-layout.two-cols-header.cols-45-55 {
+  grid-template-columns: 1fr 1.222fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-45-55) {
+  grid-template-columns: 1fr 1.222fr !important;
+}
+
 .slidev-layout.two-columns.cols-40-60,
 .slidev-layout.two-cols.cols-40-60 {
   grid-template-columns: 1fr 1.5fr !important;
@@ -264,6 +359,17 @@ ul.ul-frame {
 }
 .slidev-layout.two-cols-header:has(.col-left.cols-40-60) {
   grid-template-columns: 1fr 1.5fr !important;
+}
+
+.slidev-layout.two-columns.cols-35-65,
+.slidev-layout.two-cols.cols-35-65 {
+  grid-template-columns: 1fr 1.857fr !important;
+}
+.slidev-layout.two-cols-header.cols-35-65 {
+  grid-template-columns: 1fr 1.857fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-35-65) {
+  grid-template-columns: 1fr 1.857fr !important;
 }
 
 .slidev-layout.two-columns.cols-30-70,
@@ -286,6 +392,17 @@ ul.ul-frame {
 }
 .slidev-layout.two-cols-header:has(.col-left.cols-33-67) {
   grid-template-columns: 1fr 2fr !important;
+}
+
+.slidev-layout.two-columns.cols-20-80,
+.slidev-layout.two-cols.cols-20-80 {
+  grid-template-columns: 1fr 4fr !important;
+}
+.slidev-layout.two-cols-header.cols-20-80 {
+  grid-template-columns: 1fr 4fr !important;
+}
+.slidev-layout.two-cols-header:has(.col-left.cols-20-80) {
+  grid-template-columns: 1fr 4fr !important;
 }
 
 /* Slightly wider gutter between columns for readability */

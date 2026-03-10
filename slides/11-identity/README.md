@@ -167,12 +167,20 @@ Right content
 
 Available ratio classes:
 
+- `cols-50-50`
+- `cols-55-45`
 - `cols-60-40`
+- `cols-65-35`
 - `cols-67-33`
 - `cols-70-30`
 - `cols-75-25`
+- `cols-80-20`
+- `cols-45-55`
 - `cols-40-60`
+- `cols-35-65`
 - `cols-33-67`
+- `cols-30-70`
+- `cols-20-80`
 
 ## Vue component usage reference
 
@@ -188,6 +196,43 @@ Persistence should sit behind repository interfaces.
 
 ```md
 <Counter :count="2" />
+```
+
+### `CountdownTimer`
+
+Compact activity timer with pause and reset controls.
+
+```md
+<CountdownTimer
+  label="Activity 1"
+  :minutes="7"
+/>
+```
+
+Start automatically when the slide becomes visible:
+
+```md
+<CountdownTimer
+  label="Wrap-up"
+  :minutes="2"
+  :auto-start="true"
+  :warn-at="30"
+/>
+```
+
+`minutes` is supported for convenience. If both `minutes` and `seconds` are provided, `minutes` wins.
+The timer floats above the slide in the top-right corner by default, and you can drag it or resize it during presentation.
+
+You can also set its starting position and width:
+
+```md
+<CountdownTimer
+  label="Pair work"
+  :minutes="5"
+  :x="24"
+  :y="20"
+  :width="240"
+/>
 ```
 
 ### `Asciinema`
