@@ -22,8 +22,8 @@ Options:
   -h, --help               Show this help.
 
 Examples:
-  scripts/publish-slidev-deck.sh lectures/09-persistence/slides
-  scripts/publish-slidev-deck.sh --site-base /326/decks/09-persistence/ lectures/09-persistence/slides week-09
+  scripts/publish-slidev-deck.sh course/lectures/09-persistence/slides
+  scripts/publish-slidev-deck.sh --site-base /326/decks/09-persistence/ course/lectures/09-persistence/slides week-09
 EOF
 }
 

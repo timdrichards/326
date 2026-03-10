@@ -4,26 +4,27 @@ This repository contains course source materials plus the Docusaurus site used t
 
 ## Repo layout
 
-- `lectures/`: source-of-truth lecture units
-- `assignments/`: source-of-truth homework materials
-- `course/`: course-level authored docs such as week pages
-- `shared/`: shared readings and templates
+- `course/`: source-of-truth authored course material
+  - `course/lectures/`: lecture units with slides, readings, and code
+  - `course/assignments/`: homework specs and starter/solution code
+  - `course/weeks/`: week overview pages
+  - `course/shared/`: shared readings and templates
 - `website/`: Docusaurus publish target
 - `.github/workflows/`: automation, including GitHub Pages deployment
 
 ## Build flow
 
 The website is now a generated destination rather than the main authoring home.
-Before each site build, content is synced from the source directories above into `website/docs/` and `website/static/`.
+Before each site build, content is synced from `course/` into `website/docs/` and `website/static/`.
 
 `cd website && npm run prepare:content` performs the full preparation pass:
 
 - sync week pages from `course/weeks/`
-- sync lecture readings and shared references into `website/docs/readings/`
+- sync lecture readings and shared references from `course/lectures/` and `course/shared/` into `website/docs/readings/`
 - sync homework specs into `website/docs/homework/`
-- zip lecture code from `lectures/*/code`
-- zip homework starters from `assignments/homework/*/student`
-- build Slidev decks from `lectures/*/slides`
+- zip lecture code from `course/lectures/*/code`
+- zip homework starters from `course/assignments/homework/*/student`
+- build Slidev decks from `course/lectures/*/slides`
 
 ## Run the site locally
 

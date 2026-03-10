@@ -7,10 +7,10 @@ const WEBSITE_ROOT = process.cwd();
 const REPO_ROOT = path.resolve(WEBSITE_ROOT, "..");
 
 const SOURCE_ROOTS = {
-  lectures: path.join(REPO_ROOT, "lectures"),
-  assignments: path.join(REPO_ROOT, "assignments", "homework"),
+  lectures: path.join(REPO_ROOT, "course", "lectures"),
+  assignments: path.join(REPO_ROOT, "course", "assignments", "homework"),
   weeks: path.join(REPO_ROOT, "course", "weeks"),
-  sharedReadings: path.join(REPO_ROOT, "shared", "readings"),
+  sharedReadings: path.join(REPO_ROOT, "course", "shared", "readings"),
 };
 
 const TARGET_ROOTS = {

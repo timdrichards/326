@@ -9,7 +9,7 @@ const execFile = promisify(execFileCallback);
 
 const WEBSITE_ROOT = process.cwd();
 const REPO_ROOT = path.resolve(WEBSITE_ROOT, "..");
-const LECTURES_ROOT = path.join(REPO_ROOT, "lectures");
+const LECTURES_ROOT = path.join(REPO_ROOT, "course", "lectures");
 const PUBLISH_SCRIPT = path.join(REPO_ROOT, "scripts", "publish-slidev-deck.sh");
 
 const lectureDirs = (await fs.readdir(LECTURES_ROOT, { withFileTypes: true }))

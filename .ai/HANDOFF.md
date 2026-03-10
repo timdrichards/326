@@ -1,19 +1,34 @@
 # Session Handoffs
 
+## Session: 2026-03-10 - Course Directory Consolidation
+
+### Summary
+- Moved all authored course source material under `course/` so the repository now has a single top-level source root for teaching content.
+- Relocated:
+  - `lectures/` -> `course/lectures/`
+  - `assignments/` -> `course/assignments/`
+  - `shared/` -> `course/shared/`
+- Updated build/publish scripts, documentation, slide references, and homepage copy to use the new `course/...` paths.
+- Rebuilt synced website docs, code archives, and published deck assets from the consolidated source layout.
+
+### Verification
+- Ran `cd website && npm run build` successfully.
+- Confirmed the content preparation pipeline still syncs docs, zips lecture/homework code, and publishes decks from `course/...`.
+
 ## Session: 2026-03-10 - Source-First Repository Reorganization
 
 ### Summary
 - Reorganized the repository around source-of-truth teaching units:
-  - moved lecture materials into `lectures/`
-  - moved homework materials into `assignments/homework/`
+  - moved lecture materials into `course/lectures/`
+  - moved homework materials into `course/assignments/homework/`
   - moved week pages into `course/weeks/`
-  - moved shared readings/templates into `shared/`
+  - moved shared readings/templates into `course/shared/`
 - Archived the old top-level reading source tree under `archive/legacy-reading-source/`.
 - Added content-prep scripts under `website/scripts/` to:
   - sync readings, weeks, and homework docs into `website/docs/`
   - zip lecture code into `website/static/code/`
-  - zip homework starters from `assignments/homework/*/student`
-  - publish all lecture decks from `lectures/*/slides` into `website/static/decks/`
+  - zip homework starters from `course/assignments/homework/*/student`
+  - publish all lecture decks from `course/lectures/*/slides` into `website/static/decks/`
 - Updated `website/package.json` so `start`, `build`, `deploy`, and `publish:site` all run the new preparation pipeline first.
 - Updated repo documentation to explain the new source-first layout.
 

@@ -14,7 +14,7 @@ npm install
 npm start
 ```
 
-This command prepares synced course content, then starts a local development server. It also runs homework zip watch mode so changes in `../assignments/homework/*/student` regenerate matching files in `static/code/`.
+This command prepares synced course content, then starts a local development server. It also runs homework zip watch mode so changes in `../course/assignments/homework/*/student` regenerate matching files in `static/code/`.
 
 ## Build
 
@@ -26,12 +26,12 @@ This command syncs course content, regenerates zips/decks, and then builds stati
 
 ## Content preparation
 
-Generated website content comes from source folders outside `website/`:
+Generated website content comes from source folders under `../course/`:
 
-- lecture readings: `../lectures/*/reading/`
-- lecture code: `../lectures/*/code/`
-- lecture slides: `../lectures/*/slides/`
-- assignments: `../assignments/homework/`
+- lecture readings: `../course/lectures/*/reading/`
+- lecture code: `../course/lectures/*/code/`
+- lecture slides: `../course/lectures/*/slides/`
+- assignments: `../course/assignments/homework/`
 - weeks: `../course/weeks/`
 
 Key commands:

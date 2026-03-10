@@ -7,7 +7,7 @@ import os from "node:os";
 
 const WEBSITE_ROOT = process.cwd();
 const REPO_ROOT = path.resolve(WEBSITE_ROOT, "..");
-const LECTURES_ROOT = path.join(REPO_ROOT, "lectures");
+const LECTURES_ROOT = path.join(REPO_ROOT, "course", "lectures");
 const OUTPUT_ROOT = path.join(WEBSITE_ROOT, "static", "code");
 
 const EXCLUDED_DIRS = new Set(["node_modules", "dist", "build"]);

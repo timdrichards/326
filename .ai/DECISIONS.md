@@ -57,9 +57,9 @@ Rationale: aligns assignment expectations with a standard Node testing workflow 
 
 Rationale: simplify student workflow and keep grading focused on code + writeup evidence.
 
-## 2026-03-07 - Homework Code Archives are Generated from assignments/homework/*/student
+## 2026-03-07 - Homework Code Archives are Generated from course/assignments/homework/*/student
 
-- Canonical source for downloadable homework starter zips is `assignments/homework/<nn>/student`.
+- Canonical source for downloadable homework starter zips is `course/assignments/homework/<nn>/student`.
 - Generated output path is `website/static/code/hw-<nn>.zip`.
 - Archive generation excludes local/runtime artifacts: `node_modules`, `dist`, `build`, `prisma/migrations`, `.env`, and `*.db`.
 - Zip generation is integrated into `website` scripts for `start`, `build`, and deploy/publish flows.
@@ -76,10 +76,11 @@ Rationale: relative asset URLs keep deck HTML portable across both GitHub Pages 
 
 ## 2026-03-10 - Repository Uses Source-First Course Layout
 
-- `lectures/` is the source of truth for lecture slides, readings, and code.
-- `assignments/` is the source of truth for homework specs and starter/solution code.
-- `course/` stores course-level authored docs such as week pages.
-- `shared/` stores cross-cutting reading/reference material and templates.
+- `course/` is the source of truth for authored course material.
+- `course/lectures/` stores lecture slides, readings, and code.
+- `course/assignments/` stores homework specs and starter/solution code.
+- `course/weeks/` stores course-level week pages.
+- `course/shared/` stores cross-cutting reading/reference material and templates.
 - `website/` is the publish target, not the primary authoring home.
 - Website build scripts must sync docs and static artifacts from those source directories before Docusaurus build/deploy.
 
