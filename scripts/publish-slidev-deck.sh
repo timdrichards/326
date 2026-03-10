@@ -128,8 +128,12 @@ if [[ "${DRY_RUN}" -eq 1 ]]; then
 fi
 
 pushd "${DECK_DIR}" >/dev/null
-if [[ "${DO_INSTALL}" -eq 1 ]]; then
-  npm install
+if [[ "${DO_INSTALL}" -eq 1 || ! -x "${DECK_DIR}/node_modules/.bin/slidev" ]]; then
+  if [[ -f "${DECK_DIR}/package-lock.json" ]]; then
+    npm ci
+  else
+    npm install
+  fi
 fi
 npm run build -- --base "${DECK_BASE_PATH}"
 popd >/dev/null
