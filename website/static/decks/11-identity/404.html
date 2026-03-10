@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Identity, Credentials, and Session Establishment - Slidev</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;600&family=Fira+Code:wght@200;400;600&display=swap" type="text/css">
+<link rel="preload" as="image" href="https://cover.sli.dev">
+<link rel="preload" as="image" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjUyMCIgdmlld0JveD0iMCAwIDEyODAgNTIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiAgPHRpdGxlIGlkPSJ0aXRsZSI+T1JNIEJvdW5kYXJ5OiBBcmNoaXRlY3R1cmUgU3RpbGwgTWF0dGVyczwvdGl0bGU+CiAgPGRlc2MgaWQ9ImRlc2MiPkZsb3cgZnJvbSByb3V0ZXMgdG8gcmVwb3NpdG9yeSB0byBQcmlzbWEgdG8gZGF0YWJhc2UuPC9kZXNjPgogIDxyZWN0IHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjUyMCIgZmlsbD0iI2ZmZmZmZiIvPgogIDx0ZXh0IHg9IjY0MCIgeT0iNjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzNiIgZmlsbD0iIzFlMWUxZSI+T1JNIEJvdW5kYXJ5OiBBcmNoaXRlY3R1cmUgU3RpbGwgTWF0dGVyczwvdGV4dD4KCiAgPHJlY3QgeD0iMTIwIiB5PSIxNzAiIHdpZHRoPSIyMjAiIGhlaWdodD0iMTIwIiByeD0iMTQiIGZpbGw9IiNkMGViZmYiIHN0cm9rZT0iIzE5NzFjMiIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgPHRleHQgeD0iMjMwIiB5PSIyNDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzNCIgZmlsbD0iIzFlMWUxZSI+Um91dGVzPC90ZXh0PgoKICA8cmVjdCB4PSIzOTAiIHk9IjE3MCIgd2lkdGg9IjI2MCIgaGVpZ2h0PSIxMjAiIHJ4PSIxNCIgZmlsbD0iI2QzZjlkOCIgc3Ryb2tlPSIjMmY5ZTQ0IiBzdHJva2Utd2lkdGg9IjMiLz4KICA8dGV4dCB4PSI1MjAiIHk9IjI0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjM0IiBmaWxsPSIjMWUxZTFlIj5SZXBvc2l0b3J5PC90ZXh0PgoKICA8cmVjdCB4PSI3MDAiIHk9IjE3MCIgd2lkdGg9IjIyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxNCIgZmlsbD0iI2ZmZThjYyIgc3Ryb2tlPSIjZTY3NzAwIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8dGV4dCB4PSI4MTAiIHk9IjI0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjM0IiBmaWxsPSIjMWUxZTFlIj5QcmlzbWE8L3RleHQ+CgogIDxyZWN0IHg9Ijk3MCIgeT0iMTcwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjEyMCIgcng9IjE0IiBmaWxsPSIjZmZkZWViIiBzdHJva2U9IiNjMjI1NWMiIHN0cm9rZS13aWR0aD0iMyIvPgogIDx0ZXh0IHg9IjEwNjAiIHk9IjI0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjM0IiBmaWxsPSIjMWUxZTFlIj5EQjwvdGV4dD4KCiAgPGRlZnM+CiAgICA8bWFya2VyIGlkPSJhcnJvdyIgbWFya2VyV2lkdGg9IjEwIiBtYXJrZXJIZWlnaHQ9IjEwIiByZWZYPSI4IiByZWZZPSIzIiBvcmllbnQ9ImF1dG8iIG1hcmtlclVuaXRzPSJzdHJva2VXaWR0aCI+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTDAsNiBMOSwzIHoiIGZpbGw9IiM0OTUwNTciLz4KICAgIDwvbWFya2VyPgogIDwvZGVmcz4KCiAgPGxpbmUgeDE9IjM0MCIgeTE9IjIzMCIgeDI9IjM5MCIgeTI9IjIzMCIgc3Ryb2tlPSIjNDk1MDU3IiBzdHJva2Utd2lkdGg9IjMiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+CiAgPGxpbmUgeDE9IjY1MCIgeTE9IjIzMCIgeDI9IjcwMCIgeTI9IjIzMCIgc3Ryb2tlPSIjNDk1MDU3IiBzdHJva2Utd2lkdGg9IjMiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+CiAgPGxpbmUgeDE9IjkyMCIgeTE9IjIzMCIgeDI9Ijk3MCIgeTI9IjIzMCIgc3Ryb2tlPSIjNDk1MDU3IiBzdHJva2Utd2lkdGg9IjMiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+CgogIDx0ZXh0IHg9IjY0MCIgeT0iMzcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiMxZTFlMWUiPlN3YXAgc3RvcmFnZSBpbXBsZW1lbnRhdGlvbiwgbm90IGFyY2hpdGVjdHVyZS48L3RleHQ+CiAgPHRleHQgeD0iNjQwIiB5PSI0MTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzFlMWUxZSI+UHJpc21hIGJlbG9uZ3MgaW5zaWRlIHRoZSBwZXJzaXN0ZW5jZSBib3VuZGFyeS48L3RleHQ+Cjwvc3ZnPgo=">
+<link rel="preload" as="image" href="/assets/stateless-vs-sessions-c3b8SEh0.png">
+<link rel="icon" href="/favicon.svg">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta property="slidev:version" content="52.14.0">
+<meta name="description" content="&quot;COMPSCI 326 Web Programming\nLecture 6.11: Identity, Credentials, and Session Establishment\n&quot;">
+<meta property="og:title" content="Identity, Credentials, and Session Establishment - Slidev">
+<meta property="og:description" content="&quot;COMPSCI 326 Web Programming\nLecture 6.11: Identity, Credentials, and Session Establishment\n&quot;">  <script type="module" crossorigin src="/assets/index-BfRq8JLv.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modules/vue-DBvcF-js.js">
+  <link rel="modulepreload" crossorigin href="/assets/modules/shiki-BBvRFptw.js">
+  <link rel="stylesheet" crossorigin href="/assets/modules/shiki-UqVAgQbi.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-ChXiijah.css">
+</head>
+<body>
+  <div id="app"></div>
+  <div id="mermaid-rendering-container"></div>
+  
+</body>
+</html>

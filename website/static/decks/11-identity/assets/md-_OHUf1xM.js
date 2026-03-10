@@ -1,0 +1,16 @@
+import{_ as c}from"./CountdownTimer-rZAIWoKC.js";import{_ as d}from"./slidev/CodeBlockWrapper.vue_vue_type_script_setup_true_lang-C-6Cevaz.js";import{o as m,b as _,w as l,g as s,d as t,m as k,ad as e,v as h,x as f,T as a}from"./modules/vue-DBvcF-js.js";import{I as g}from"./slidev/two-cols-header-BRMLYeWS.js";import{u as v,f as w}from"./slidev/context-DuVjZ5d1.js";import"./index-BfRq8JLv.js";import"./modules/shiki-BBvRFptw.js";import"./modules/unplugin-icons-SLVQfZDF.js";const z={__name:"slides.md__slidev_9",setup(b){const{$clicksContext:o,$frontmatter:i}=v();return o.setup(),(y,n)=>{const r=d,u=c;return m(),_(g,h(f(a(w)(a(i),8))),{left:l(p=>[n[1]||(n[1]=s("p",null,"Consider the following browser/server interaction over HTTP:",-1)),t(r,k({},{title:"",ranges:[]}),{default:l(()=>[...n[0]||(n[0]=[s("pre",{class:"shiki shiki-themes vitesse-dark vitesse-light slidev-code",style:{"--shiki-dark":"#dbd7caee","--shiki-light":"#393a34","--shiki-dark-bg":"#121212","--shiki-light-bg":"#ffffff"}},[s("code",{class:"language-text"},[s("span",{class:"line"},[s("span",null,"Shared sequence")]),e(`
+`),s("span",{class:"line"},[s("span")]),e(`
+`),s("span",{class:"line"},[s("span",null,"1. Browser -> POST /login with credentials")]),e(`
+`),s("span",{class:"line"},[s("span",null,"2. Server verifies credentials")]),e(`
+`),s("span",{class:"line"},[s("span",null,"3. Server creates session record:")]),e(`
+`),s("span",{class:"line"},[s("span",null,'       key = "sess_7F3A"')]),e(`
+`),s("span",{class:"line"},[s("span",null,'       value = { userId: 42, role: "student" }')]),e(`
+`),s("span",{class:"line"},[s("span",null,"4. Server response includes the following header:")]),e(`
+`),s("span",{class:"line"},[s("span",null,"   Set-Cookie: sid = __________")]),e(`
+`),s("span",{class:"line"},[s("span",null,"5. Browser stores that cookie")]),e(`
+`),s("span",{class:"line"},[s("span",null,"6. Later browser request sends:")]),e(`
+`),s("span",{class:"line"},[s("span",null,"   Cookie: userId = 42          <-- one step is wrong")]),e(`
+`),s("span",{class:"line"},[s("span",null,"7. Server tries to look up the session id:")]),e(`
+`),s("span",{class:"line"},[s("span",null,"   sessionStore[ __________ ]")]),e(`
+`),s("span",{class:"line"},[s("span",null,"8. If lookup succeeds, server knows this is ")]),e(`
+`),s("span",{class:"line"},[s("span",null,"   the same browser")])])],-1)])]),_:1},16)]),right:l(p=>[t(u,{label:"Activity 1",minutes:8,"auto-start":!0,"warn-at":30}),n[2]||(n[2]=s("div",{class:"text-sm"},[s("p",null,[s("strong",null,"Write down:")]),s("ul",null,[s("li",null,"the correct cookie value in step 4"),s("li",null,"the correct lookup key in step 7"),s("li",null,"the exact step number that is broken"),s("li",null,"one sentence explaining why it breaks continuity")])],-1)),n[3]||(n[3]=s("p",null,[s("strong",null,"Facts you may use:")],-1)),n[4]||(n[4]=s("ul",{class:"ul-frame text-sm"},[s("li",null,"HTTP is stateless unless the app creates a continuity channel."),s("li",null,"The browser sends the cookie back on later requests."),s("li",null,"The cookie should hold the session id, not the full user state."),s("li",null,"The server looks up session data by that session id.")],-1))]),default:l(()=>[n[5]||(n[5]=s("h2",null,"In-Class Activity 1: Continuity Channel Puzzle",-1))]),_:1},16)}}};export{z as default};
