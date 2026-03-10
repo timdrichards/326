@@ -55,6 +55,7 @@ const config = {
             '**/_*.md',
             '**/_*.mdx',
             '**/excalidraw/**',
+            '**/*.excalidraw',
             '**/*.excalidraw.md',
             '**/node_modules/**',
             '**/dist/**',

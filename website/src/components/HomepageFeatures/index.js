@@ -28,7 +28,7 @@ const FeatureList = [
     title: 'Docs First, Code Nearby',
     description: (
       <>
-        This repo keeps the website in <code>website/</code> so your course assets in <code>lectures/</code> stay isolated.
+        This repo keeps authored material in <code>course/</code> and the published site in <code>website/</code>.
       </>
     ),
     href: '/docs/intro',

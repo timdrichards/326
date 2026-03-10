@@ -1,5 +1,92 @@
 # Session Handoffs
 
+## Session: 2026-03-10 - Reading Excalidraw Sources Restored to Native Format
+
+### Summary
+- Converted the reading diagram source files in `course/readings/excalidraw/` from Obsidian-style `.excalidraw.md` wrappers into native `.excalidraw` JSON files.
+- Kept the exported SVGs unchanged for the website-reading pages.
+- Updated `website/docusaurus.config.js` to exclude both `*.excalidraw` and `*.excalidraw.md` from docs processing.
+
+### Verification
+- Confirmed the files in `course/readings/excalidraw/` now use the `.excalidraw` extension and contain native Excalidraw JSON.
+- Ran `cd website && npm run build` successfully.
+
+## Session: 2026-03-10 - Course Readings Consolidated Under course/readings
+
+### Summary
+- Moved the canonical class reading/book sources into `course/readings/`.
+- Relocated lecture reading chapters and reading assets out of lecture folders into the new shared book directory.
+- Moved shared glossary/reference chapters from `course/shared/readings/` into `course/readings/`.
+- Simplified `website/scripts/sync-course-content.mjs` so `website/docs/readings/` is now published directly from `course/readings/`.
+- Updated repo docs to describe `course/readings/` as the canonical source for the class book.
+
+### Verification
+- Ran `cd website && npm run build` successfully.
+- Confirmed `website/docs/readings/` is now republished directly from `course/readings/`.
+
+## Session: 2026-03-10 - Course Directory Consolidation
+
+### Summary
+- Moved all authored course source material under `course/` so the repository now has a single top-level source root for teaching content.
+- Relocated:
+  - `lectures/` -> `course/lectures/`
+  - `assignments/` -> `course/assignments/`
+  - `shared/` -> `course/shared/`
+- Updated build/publish scripts, documentation, slide references, and homepage copy to use the new `course/...` paths.
+- Rebuilt synced website docs, code archives, and published deck assets from the consolidated source layout.
+
+### Verification
+- Ran `cd website && npm run build` successfully.
+- Confirmed the content preparation pipeline still syncs docs, zips lecture/homework code, and publishes decks from `course/...`.
+
+## Session: 2026-03-10 - Source-First Repository Reorganization
+
+### Summary
+- Reorganized the repository around source-of-truth teaching units:
+  - moved lecture materials into `course/lectures/`
+  - moved homework materials into `course/assignments/homework/`
+  - moved week pages into `course/weeks/`
+  - moved shared readings/templates into `course/shared/`
+- Archived the old top-level reading source tree under `archive/legacy-reading-source/`.
+- Added content-prep scripts under `website/scripts/` to:
+  - sync readings, weeks, and homework docs into `website/docs/`
+  - zip lecture code into `website/static/code/`
+  - zip homework starters from `course/assignments/homework/*/student`
+  - publish all lecture decks from `course/lectures/*/slides` into `website/static/decks/`
+- Updated `website/package.json` so `start`, `build`, `deploy`, and `publish:site` all run the new preparation pipeline first.
+- Updated repo documentation to explain the new source-first layout.
+
+### Verification
+- Ran `cd website && npm run prepare:content` successfully.
+- Ran `cd website && npm run build` successfully.
+- Confirmed `website/docs/` and `website/static/` are now regenerated from the new source directories.
+
+## Session: 2026-03-10 - Site Watcher Change-Only Output
+
+### Summary
+- Updated `website/scripts/watch-site-status.mjs` so default behavior prints only a single colorized line when the observed site state changes.
+- Added color-coded states:
+  - green for deployed/live
+  - yellow for partial/pending states
+  - blue for branch-present but live-site-not-ready states
+  - red for request or branch-check failures
+- Kept `--verbose` as an opt-in mode for per-check debug logging.
+
+### Verification
+- Ran `npm run watch:site -- --once` from the repo root and confirmed it emitted one yellow line only.
+- Ran `npm run watch:site -- --once --verbose` and confirmed verbose polling logs still work.
+
+## Session: 2026-03-10 - GitHub Pages Site Watcher
+
+### Summary
+- Added `website/scripts/watch-site-status.mjs` to poll the live site URL and the `gh-pages` branch on a fixed interval.
+- Added `npm run watch:site` in `website/package.json`.
+- The watcher logs every check, reports whether `gh-pages` exists yet, prints HTTP status/ETag/Last-Modified for the live site, and detects likely new deployed builds via HTML hash and asset fingerprint changes.
+
+### Verification
+- Ran `cd website && npm run watch:site -- --once`.
+- Confirmed it logged a successful live-site check for `https://timdrichards.github.io/326/` and correctly reported that `gh-pages` does not exist yet.
+
 ## Session: 2026-03-10 - Slidev Deck Publish Path Fix
 
 ### Summary

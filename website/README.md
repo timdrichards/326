@@ -14,7 +14,7 @@ npm install
 npm start
 ```
 
-This command starts a local development server. It also runs homework zip watch mode so changes in `docs/homework/*/student` regenerate matching files in `static/code/`.
+This command prepares synced course content, then starts a local development server. It also runs homework zip watch mode so changes in `../course/assignments/homework/*/student` regenerate matching files in `static/code/`.
 
 ## Build
 
@@ -22,13 +22,25 @@ This command starts a local development server. It also runs homework zip watch 
 npm run build
 ```
 
-This command generates homework zips first, then builds static content into `build/`.
+This command syncs course content, regenerates zips/decks, and then builds static content into `build/`.
 
-## Homework zip generation
+## Content preparation
 
-Homework zip files are generated from `docs/homework/<nn>/student` to `static/code/hw-<nn>.zip`.
+Generated website content comes from source folders under `../course/`:
 
-- Run once: `npm run zip:homework`
+- class readings/book: `../course/readings/`
+- lecture code: `../course/lectures/*/code/`
+- lecture slides: `../course/lectures/*/slides/`
+- assignments: `../course/assignments/homework/`
+- weeks: `../course/weeks/`
+
+Key commands:
+
+- Run all content preparation: `npm run prepare:content`
+- Sync docs only: `npm run sync:content`
+- Zip lecture code: `npm run zip:lecture-code`
+- Zip homework starters: `npm run zip:homework`
+- Publish all decks: `npm run publish:decks`
 - Watch for changes: `npm run zip:homework:watch`
 
 The zip process excludes: `node_modules`, `dist`, `build`, `prisma/migrations`, `.env`, and `*.db`.
@@ -41,4 +53,4 @@ Use:
 npm run deploy
 ```
 
-`deploy` also runs homework zip generation before publishing.
+`deploy` also runs the full content preparation pipeline before publishing.
